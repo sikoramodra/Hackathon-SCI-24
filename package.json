@@ -1,0 +1,16 @@
+{
+  "name": "Hackathon-SCI-24",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare": "husky",
+    "build": "docker compose build",
+    "dev": "docker compose up",
+    "format": "pnpm -C backend run format && pnpm -C frontend run format",
+    "lint": "pnpm -C backend run lint && pnpm -C frontend run lint"
+  },
+  "devDependencies": {
+    "husky": "^9.1.6"
+  }
+}
