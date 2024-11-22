@@ -38,7 +38,7 @@ function __generateEffectiveRange(quality) {
     rangeStart = globalVars['TIME_START'];
   }
 
-  const rangeEnd = rangeStart + rangeLength;
+  let rangeEnd = rangeStart + rangeLength;
   if (rangeEnd > globalVars['TIME_END']) {
     rangeEnd = globalVars['TIME_END'];
   }
