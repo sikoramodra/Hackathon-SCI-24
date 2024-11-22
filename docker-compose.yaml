@@ -12,36 +12,36 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
 
-  api:
-    container_name: api
-    build: ./backend
-    user: ${UID}:${GID}
-    restart: always
-    ports:
-      - ${SERVER_PORT}:${SERVER_PORT}
-    volumes:
-      - ./backend:/api
-    environment:
-      - NODE_ENV
-      - SERVER_PORT
-      - DB_HOST
-      - DB_USER
-      - DB_PASSWORD
-      - DB_NAME
-      - DB_PORT
-      - JWT_SECRET_DEV
-      - JWT_SECRET_PROD
-    depends_on:
-      - mongo
-
-  client:
-    container_name: client
-    build: ./frontend
-    restart: always
-    ports:
-      - ${CLIENT_PORT}:${CLIENT_PORT}
-    environment:
-      - CLIENT_PORT
+  # api:
+  #   container_name: api
+  #   build: ./backend
+  #   user: ${UID}:${GID}
+  #   restart: always
+  #   ports:
+  #     - ${SERVER_PORT}:${SERVER_PORT}
+  #   volumes:
+  #     - ./backend:/api
+  #   environment:
+  #     - NODE_ENV
+  #     - SERVER_PORT
+  #     - DB_HOST
+  #     - DB_USER
+  #     - DB_PASSWORD
+  #     - DB_NAME
+  #     - DB_PORT
+  #     - JWT_SECRET_DEV
+  #     - JWT_SECRET_PROD
+  #   depends_on:
+  #     - mongo
+  #
+  # client:
+  #   container_name: client
+  #   build: ./frontend
+  #   restart: always
+  #   ports:
+  #     - ${CLIENT_PORT}:${CLIENT_PORT}
+  #   environment:
+  #     - CLIENT_PORT
 
 volumes:
   mongo-data:
