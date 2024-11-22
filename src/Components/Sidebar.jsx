@@ -8,7 +8,7 @@ export default function Sidebar(props) {
 
   return (
     <div className="no-scrollbar h-full w-full overflow-y-auto">
-      <div className="flex w-32 flex-col items-center gap-4 bg-gray-200 px-4 pb-20 pt-4">
+      <div className="flex h-full w-32 flex-col items-center gap-4 bg-gray-200 px-4 pb-20 pt-4">
         {props.agents.map((val, key) => (
           <div key={key} className="group relative flex align-middle">
             <img
@@ -18,6 +18,10 @@ export default function Sidebar(props) {
               onClick={handleAgentClick(val)}
             />
             <div className="absolute left-full ml-2 hidden w-32 rounded bg-gray-300 p-2 shadow-md group-hover:block">
+              <p className="mb-2 text-sm text-gray-600">
+                <span className="font-semibold">Name: </span>
+                {val.fullName}
+              </p>
               <p className="mb-2 text-sm text-gray-600">
                 <span className="font-semibold">Age: </span>
                 {val.age}
