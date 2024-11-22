@@ -10,12 +10,11 @@ export default function App() {
   );
 
   return (
-    <div className="flex w-screen h-screen bg-gray-100">
-      <div className="h-full w-36">
+    <div className="flex h-full w-full bg-gray-100">
+      <div className="h-full w-1/3">
         <Sidebar agents={agents} />
       </div>
-      <div className="w-1/6 h-full"></div>
-      <div className="w-full h-full">
+      <div className="h-full w-full">
         <TaskView />
       </div>
     </div>
