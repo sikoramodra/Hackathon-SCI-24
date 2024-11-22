@@ -11,7 +11,7 @@ const reqTypes = [
 const generateTask = (difficulty) => {
     let additionalReqAmount = __generateAdditionalReqAmount(difficulty)
     let requirements = []
-    for(let i = 0; i < additionalReqAmount; i++){
+    for (let i = 0; i < additionalReqAmount; i++) {
         requirements.push(__generateReq())
     }
     requirements.push(
@@ -22,28 +22,26 @@ const generateTask = (difficulty) => {
     return task
 }
 
-function __generateAdditionalReqAmount(difficulty){
+function __generateAdditionalReqAmount(difficulty) {
     const twoProbsChance = difficulty * 2;
     const threeProbsChance = difficulty;
     const random = __getRandomIntInclusive(100);
-    if(random <= threeProbsChance){
+    if (random <= threeProbsChance) {
         return 3;
-    } else if(random <= twoProbsChance){
+    } else if (random <= twoProbsChance) {
         return 2;
     } else return 1;
 }
 
-function __generateReq(){
+function __generateReq() {
     const reqType = reqTypes[__getRandomIntInclusive(0, reqTypes.length - 1)]
-    switch(reqType){
+    switch (reqType) {
         case 'age':
-            return['age', __getRandomIntInclusive(globalVars['MIN_AGE'], globalVars['MAX_AGE'])];
+            return ['age', __getRandomIntInclusive(globalVars['MIN_AGE'], globalVars['MAX_AGE'])];
         case 'spec':
-            return['spec', specs[__getRandomIntInclusive(0, specs.length - 1)]]
+            return ['spec', specs[__getRandomIntInclusive(0, specs.length - 1)]]
         case 'sex':
-            let sexIndex = __getRandomIntInclusive(0, 1);
-            let sexes = ['male', 'female']
-            return['sex', sexes[sexIndex]]
+            return ['sex', ['male', 'female'][__getRandomIntInclusive(0, 1)]]
     }
 }
 
