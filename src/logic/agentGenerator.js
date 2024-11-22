@@ -1,4 +1,5 @@
 import globalVars from "./globalVariables";
+import { fakerPL } from "@faker-js/faker/.";
 import Agent from "./agent";
 
 const specialties = [
@@ -13,9 +14,10 @@ const generateAgent = (quality) => {
     const age = __getRandomIntInclusive(18, 70);
     const sex = __generateSex()
     const specialty = specialties[__getRandomIntInclusive(0, specialties.length - 1)]
+    const fullName = fakerPL.fullName({ sex: sex})
     const [effectiveRangeStart, effectiveRangeEnd] = __generateEffectiveRange(quality)
 
-    const agent = new Agent(sex, age, specialty, effectiveRangeStart, effectiveRangeEnd)
+    const agent = new Agent(sex, age, fullName, specialty, effectiveRangeStart, effectiveRangeEnd)
     return agent
 }
 
