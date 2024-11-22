@@ -9,8 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint --fix './**/*.{js,cjs,mjs,jsx}'",
     "format": "prettier --write './**/*.{js,cjs,mjs,jsx,css,md,json}'",
-    "lint-staged": "lint-staged",
-    "prepare": "husky"
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -32,7 +31,6 @@
     "eslint-plugin-react-refresh": "^0.4.12",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^15.9.0",
-    "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
