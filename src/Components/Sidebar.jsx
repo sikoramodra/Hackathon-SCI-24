@@ -1,22 +1,35 @@
-import agent from '../assets/agent.png';
+import agentIcon from '../assets/agent.png';
 
-export default function Sidebar() {
-  const handleAgentClick = () => {};
+export default function Sidebar(props) {
+  const handleAgentClick = (agent) => {};
 
   return (
-    <div className="flex flex-col items-start w-full h-full gap-4 p-4 bg-gray-200">
-      {['p1', 'p2', 'p3'].map((val, key) => (
-        <div key={key} className="flex group">
+    <div className="flex h-full w-full flex-col items-start gap-4 bg-gray-200 p-4">
+      {props.agents.map((val, key) => (
+        <div key={key} className="group flex">
           <img
-            className="w-20 h-20 bg-gray-300 rounded"
-            src={agent}
+            className="h-20 w-20 rounded bg-gray-300 shadow-md"
+            src={agentIcon}
             alt="agent"
-            onClick={handleAgentClick}
+            onClick={handleAgentClick(val)}
           />
-          <div className="hidden p-2 ml-1 bg-gray-300 rounded overflow-clip group-hover:block">
-            <p>info1: </p>
-            <p>info2: </p>
-            <p>info3: </p>
+          <div className="absolute left-6 ml-20 hidden rounded bg-gray-300 p-2 shadow-md group-hover:block">
+            <p className="mb-2 text-sm text-gray-600">
+              <span className="font-semibold">Age: </span>
+              {val.age}
+            </p>
+            <p className="mb-2 text-sm text-gray-600">
+              <span className="font-semibold">spec: </span>
+              {val.spec}
+            </p>
+            <p className="mb-2 text-sm text-gray-600">
+              <span className="font-semibold">sex: </span>
+              {val.sex}
+            </p>
+            <p className="mb-2 text-sm text-gray-600">
+              <span className="font-semibold">effective range: </span>
+              {val.effectiveRangeStart}-{val.effectiveRangeEnd}
+            </p>
           </div>
         </div>
       ))}
