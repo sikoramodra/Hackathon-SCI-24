@@ -1,14 +1,22 @@
+import Requirement from './Requirement.jsx';
+
 export default function TaskView() {
+    const agent = {
+        name: "halodsahjk",
+        age: 30,
+        id: "agent001"
+      };
+      
   return (
-    <div className="grid w-full h-full grid-cols-3 grid-rows-3 border">
+    <div className="grid w-full h-full grid-cols-3 grid-rows-3">
       <div className="flex items-center justify-center col-start-3 row-start-1 bg-blue-300 border">
-        1
+        Requirements section
       </div>
       <div className="flex items-center justify-center col-start-3 row-start-3 bg-green-300 border">
-        2
+        Button Section
       </div>
-      <div className="flex items-center justify-center col-span-2 row-span-3 row-start-1 bg-yellow-300 border">
-        3
+      <div className="flex items-center justify-center col-span-2 row-span-3 row-start-1">
+        <Requirement agent={agent} />
       </div>
     </div>
   );
