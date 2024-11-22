@@ -6,7 +6,17 @@ import { useState } from 'react';
 
 export default function TaskView() {
   // eslint-disable-next-line no-unused-vars
-  const [currentTask, setCurrentTask] = useState(new Task('task001', [['age', 20], ['year', 1500]], 'task1 description', 10));
+  const [currentTask, setCurrentTask] = useState(
+    new Task(
+      'task001',
+      [
+        ['age', 20],
+        ['year', 1500],
+      ],
+      'task1 description',
+      10,
+    ),
+  );
 
   const tasks = [
     new Task(
@@ -65,14 +75,14 @@ export default function TaskView() {
     ),
   ];
   return (
-    <div className="grid w-full h-full grid-cols-3 grid-rows-3">
-      <div className="flex items-center justify-center col-start-3 row-start-1 bg-blue-100 border">
+    <div className="grid h-full w-full grid-cols-3 grid-rows-3">
+      <div className="col-start-3 row-start-1 flex items-center justify-center border bg-blue-100">
         <TaskContainer tasks={tasks} />
       </div>
-      <div className="flex items-center justify-center col-start-3 row-start-3 bg-gray-100 border rounded-lg">
+      <div className="col-start-3 row-start-3 flex items-center justify-center rounded-lg border bg-gray-100">
         <Buttons />
       </div>
-      <div className="flex items-center justify-center col-span-2 row-span-3 row-start-1">
+      <div className="col-span-2 row-span-3 row-start-1 flex items-center justify-center">
         <CurrentTask currentTask={currentTask} />
       </div>
     </div>
