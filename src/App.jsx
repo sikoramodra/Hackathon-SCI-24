@@ -1,9 +1,9 @@
-import Test from './Components/Test/Test.jsx';
+import Sidebar from './Components/Sidebar.jsx';
 
 export default function App() {
   return (
-    <div>
-      <Test />
+    <div className="h-full w-full">
+      <Sidebar />
     </div>
   );
 }
