@@ -1,3 +1,4 @@
+import Buttons from './Buttons.jsx';
 import Requirement from './Requirement.jsx';
 
 export default function TaskView() {
@@ -12,8 +13,8 @@ export default function TaskView() {
       <div className="flex items-center justify-center col-start-3 row-start-1 bg-blue-300 border">
         Requirements section
       </div>
-      <div className="flex items-center justify-center col-start-3 row-start-3 bg-green-300 border">
-        Button Section
+      <div className="flex items-center justify-center col-start-3 row-start-3 border rounded">
+        <Buttons />
       </div>
       <div className="flex items-center justify-center col-span-2 row-span-3 row-start-1">
         <Requirement agent={agent} />
