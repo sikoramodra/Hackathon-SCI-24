@@ -11,12 +11,12 @@ export default function Sidebar() {
       {['p1', 'p2', 'p3'].map((val, key) => (
         <div key={key} className="group flex">
           <img
-            className="h-20 w-20 rounded bg-gray-300"
+            className="h-20 w-20 rounded bg-gray-300 shadow-md"
             src={agentIcon}
             alt="agent"
             onClick={handleAgentClick(val)}
           />
-          <div className="ml-1 hidden min-w-52 rounded bg-gray-300 p-2 shadow-md group-hover:block">
+          <div className="absolute left-6 ml-20 hidden rounded bg-gray-300 p-2 shadow-md group-hover:block">
             <p className="mb-2 text-sm text-gray-600">
               <span className="font-semibold">Age: </span>
               {testAgent.age}
