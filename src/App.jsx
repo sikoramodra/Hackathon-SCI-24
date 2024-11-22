@@ -1,6 +1,6 @@
 import TaskView from './Components/TaskView.jsx';
 import Sidebar from './Components/Sidebar.jsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import generateAgent from './logic/agentGenerator.js';
 import generateTask from './logic/taskGenerator.js';
 
@@ -11,13 +11,22 @@ export default function App() {
   );
   const [tasks, setTasks] = useState(
     Array.from({ length: 5 }, () => generateTask(1)),
-  )
-  console.log(tasks)
+  );
+  // console.log(tasks);
+
+  const [selectedAgent, setSelectedAgent] = useState(null);
+  useEffect(() => {
+    console.log(selectedAgent);
+  }, [selectedAgent]);
 
   return (
     <div className="flex h-full w-full bg-gray-100">
       <div className="h-full w-1/3">
-        <Sidebar agents={agents} />
+        <Sidebar
+          agents={agents}
+          setSelectedAgent={setSelectedAgent}
+          selectedAgent={selectedAgent}
+        />
       </div>
       <div className="h-full w-full">
         <TaskView />
