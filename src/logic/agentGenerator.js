@@ -1,6 +1,6 @@
 import globalVars from './globalVariables';
 import Agent from './agent';
-import { faker } from '@faker-js/faker';
+import { fakerPL } from '@faker-js/faker';
 
 const specialties = globalVars['SPECIALTIES']
 
@@ -9,7 +9,7 @@ const generateAgent = (quality) => {
     const age = __getRandomIntInclusive(globalVars['MIN_AGE'], globalVars['MAX_AGE']);
     const sex = __generateSex()
     const spec = specialties[__getRandomIntInclusive(0, specialties.length - 1)]
-    const fullName = faker.person.fullName({ sex: sex})
+    const fullName = fakerPL.person.fullName({ sex: sex})
     const [effectiveRangeStart, effectiveRangeEnd] = __generateEffectiveRange(quality)
 
     const agent = new Agent(sex, age, fullName, quality, spec, effectiveRangeStart, effectiveRangeEnd)
@@ -38,7 +38,7 @@ function __generateEffectiveRange(quality) {
     rangeStart = globalVars['TIME_START'];
   }
 
-  const rangeEnd = rangeStart + rangeLength;
+  let rangeEnd = rangeStart + rangeLength;
   if (rangeEnd > globalVars['TIME_END']) {
     rangeEnd = globalVars['TIME_END'];
   }

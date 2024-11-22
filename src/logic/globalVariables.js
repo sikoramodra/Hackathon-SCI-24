@@ -8,7 +8,7 @@ const globalVars = {
         'spy',
         'killer',
         'engineer',
-    ]
+    ],
 }
 
 export default globalVars

@@ -11,8 +11,12 @@ const reqTypes = [
 const generateTask = (difficulty) => {
     let additionalReqAmount = __generateAdditionalReqAmount(difficulty)
     let requirements = []
-    for (let i = 0; i < additionalReqAmount; i++) {
-        requirements.push(__generateReq())
+    let remainingReqTypes = [...reqTypes];
+    remainingReqTypes.splice(remainingReqTypes.indexOf('year', 1))
+    for(let i = 0; i < additionalReqAmount; i++){
+        let requirement = __generateReq(remainingReqTypes)
+        remainingReqTypes.splice(reqTypes.indexOf(requirement[0]), 1);
+        requirements.push(requirement)
     }
     requirements.push(
         ['year', __getRandomIntInclusive(globalVars['TIME_START'], globalVars['TIME_END'])]
@@ -25,23 +29,25 @@ const generateTask = (difficulty) => {
 function __generateAdditionalReqAmount(difficulty) {
     const twoProbsChance = difficulty * 2;
     const threeProbsChance = difficulty;
-    const random = __getRandomIntInclusive(100);
-    if (random <= threeProbsChance) {
+    console.log("twoprobschance " + twoProbsChance + " 3probschance " + threeProbsChance)
+    const random = __getRandomIntInclusive(0, 100);
+    if(random <= threeProbsChance){
         return 3;
     } else if (random <= twoProbsChance) {
         return 2;
     } else return 1;
 }
 
-function __generateReq() {
-    const reqType = reqTypes[__getRandomIntInclusive(0, reqTypes.length - 1)]
-    switch (reqType) {
+function __generateReq(remainingReqTypes){
+    console.log(remainingReqTypes)
+    const reqType = remainingReqTypes[__getRandomIntInclusive(0, remainingReqTypes.length - 1)]
+    switch(reqType){
         case 'age':
             return ['age', __getRandomIntInclusive(globalVars['MIN_AGE'], globalVars['MAX_AGE'])];
         case 'spec':
             return ['spec', specs[__getRandomIntInclusive(0, specs.length - 1)]]
         case 'sex':
-            return ['sex', ['male', 'female'][__getRandomIntInclusive(0, 1)]]
+            return['sex', ['male', 'female'][__getRandomIntInclusive(0, 1)]]
     }
 }
 
