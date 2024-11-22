@@ -2,7 +2,7 @@ import globalVars from './globalVariables';
 import Agent from './agent';
 import { faker } from '@faker-js/faker';
 
-const specialties = ['medic', 'spy', 'killer', 'engineer'];
+const specialties = globalVars['SPECIALTIES']
 
 // quality okresla jakie szanse ma agent na bycie dobrym od 1/20
 const generateAgent = (quality) => {
