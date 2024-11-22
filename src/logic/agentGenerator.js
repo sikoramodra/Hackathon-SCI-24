@@ -17,7 +17,7 @@ const generateAgent = (quality) => {
     const fullName = fakerPL.fullName({ sex: sex})
     const [effectiveRangeStart, effectiveRangeEnd] = __generateEffectiveRange(quality)
 
-    const agent = new Agent(sex, age, fullName, specialty, effectiveRangeStart, effectiveRangeEnd)
+    const agent = new Agent(sex, age, fullName, quality, specialty, effectiveRangeStart, effectiveRangeEnd)
     return agent
 }
 
