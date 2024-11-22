@@ -1,19 +1,22 @@
 import agentIcon from '../assets/agent.png';
 
 export default function Sidebar(props) {
-  const handleAgentClick = (agent) => {};
+  // eslint-disable-next-line no-unused-vars
+  const handleAgentClick = (agent) => {
+    // todo
+  };
 
   return (
-    <div className="flex h-full w-full flex-col items-start gap-4 bg-gray-200 p-4">
+    <div className="flex flex-col items-start w-full h-full gap-4 p-4 bg-gray-200">
       {props.agents.map((val, key) => (
-        <div key={key} className="group flex">
+        <div key={key} className="flex group">
           <img
-            className="h-20 w-20 rounded bg-gray-300 shadow-md"
+            className="w-20 h-20 bg-gray-300 rounded shadow-md"
             src={agentIcon}
             alt="agent"
             onClick={handleAgentClick(val)}
           />
-          <div className="absolute left-6 ml-20 hidden rounded bg-gray-300 p-2 shadow-md group-hover:block">
+          <div className="absolute hidden p-2 ml-20 bg-gray-300 rounded shadow-md left-6 group-hover:block">
             <p className="mb-2 text-sm text-gray-600">
               <span className="font-semibold">Age: </span>
               {val.age}
