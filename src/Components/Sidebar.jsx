@@ -1,22 +1,38 @@
-import agent from '../assets/agent.png';
+import agentIcon from '../assets/agent.png';
+import { useState } from 'react';
+import generateAgent from '../logic/agentGenerator.js';
 
 export default function Sidebar() {
-  const handleAgentClick = () => {};
+  const handleAgentClick = (agent) => {};
+  const [testAgent, setTestAgent] = useState(generateAgent(1));
 
   return (
-    <div className="flex flex-col items-start w-full h-full gap-4 p-4 bg-gray-200">
+    <div className="flex h-full w-full flex-col items-start gap-4 bg-gray-200 p-4">
       {['p1', 'p2', 'p3'].map((val, key) => (
-        <div key={key} className="flex group">
+        <div key={key} className="group flex">
           <img
-            className="w-20 h-20 bg-gray-300 rounded"
-            src={agent}
+            className="h-20 w-20 rounded bg-gray-300"
+            src={agentIcon}
             alt="agent"
-            onClick={handleAgentClick}
+            onClick={handleAgentClick(val)}
           />
-          <div className="hidden p-2 ml-1 bg-gray-300 rounded overflow-clip group-hover:block">
-            <p>info1: </p>
-            <p>info2: </p>
-            <p>info3: </p>
+          <div className="ml-1 hidden min-w-48 rounded bg-gray-300 p-2 shadow-md group-hover:block">
+            <p className="mb-2 text-sm text-gray-600">
+              <span className="font-semibold">Age: </span>
+              {testAgent.age}
+            </p>
+            <p className="mb-2 text-sm text-gray-600">
+              <span className="font-semibold">spec: </span>
+              {testAgent.spec}
+            </p>
+            <p className="mb-2 text-sm text-gray-600">
+              <span className="font-semibold">sex: </span>
+              {testAgent.sex}
+            </p>
+            <p className="mb-2 text-sm text-gray-600">
+              <span className="font-semibold">effective range: </span>
+              {testAgent.effectiveRangeStart}-{testAgent.effectiveRangeEnd}
+            </p>
           </div>
         </div>
       ))}
