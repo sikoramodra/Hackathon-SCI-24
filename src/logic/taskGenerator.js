@@ -11,7 +11,7 @@ const reqTypes = [
 const generateTask = (difficulty) => {
     let additionalReqAmount = __generateAdditionalReqAmount(difficulty)
     let requirements = []
-    for(i = 0; i < additionalReqAmount; i++){
+    for(let i = 0; i < additionalReqAmount; i++){
         requirements.push(__generateReq())
     }
     requirements.push(
