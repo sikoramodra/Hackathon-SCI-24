@@ -9,9 +9,10 @@ export default function App() {
   const [agents, setAgents] = useState(
     Array.from({ length: 5 }, () => generateAgent(1)),
   );
-
-  let task = generateTask(10);
-  console.log(task)
+  const [tasks, setTasks] = useState(
+    Array.from({ length: 5 }, () => generateTask(1)),
+  )
+  console.log(tasks)
 
   return (
     <div className="flex h-full w-full bg-gray-100">
