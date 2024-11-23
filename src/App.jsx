@@ -61,7 +61,10 @@ export default function App() {
   }
 
   const addNewAgent = () => {
-    setAgents((prevAgents) => [...prevAgents, generateAgent(1)]);
+    setAgents((prevAgents) => [
+      ...prevAgents,
+      generateAgent(Math.floor(Math.random() * 20) + 1),
+    ]);
   };
 
   return tasks.length === 0 ? (
