@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import generateAgent from './logic/agentGenerator.js';
 import generateTask from './logic/taskGenerator.js';
 import EndDay from './Components/EndDay.jsx';
+import desk from './assets/desk.png';
 
 export default function App() {
   const [agentsSize, setAgentsSize] = useState(7);
@@ -22,9 +23,9 @@ export default function App() {
     setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
   };
   const generateNextRound = () => {
-    finishedTasks.forEach(element => {
-      if(element[1] !== null) {
-        setAgents(prevAgents => [...prevAgents, element[1]]);
+    finishedTasks.forEach((element) => {
+      if (element[1] !== null) {
+        setAgents((prevAgents) => [...prevAgents, element[1]]);
       }
     });
     setFinishedTasks([]);
@@ -32,7 +33,7 @@ export default function App() {
   };
 
   const addNewAgent = () => {
-    setAgents(prevAgents => [...prevAgents, generateAgent(1)])
+    setAgents((prevAgents) => [...prevAgents, generateAgent(1)]);
   };
 
   return tasks.length === 0 ? (
@@ -44,7 +45,10 @@ export default function App() {
       generateNextRound={generateNextRound}
     ></EndDay>
   ) : (
-    <div className="flex h-full w-full bg-gray-100">
+    <div
+      className="flex h-full w-full bg-gray-100 bg-repeat"
+      style={{ backgroundImage: `url(${desk})` }}
+    >
       <div className="h-full w-1/3">
         <Sidebar
           agents={agents}
