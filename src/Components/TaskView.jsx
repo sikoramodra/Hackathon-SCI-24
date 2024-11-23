@@ -21,13 +21,18 @@ export default function TaskView({
     setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
     setSelectedAgentIndex(null);
     setCurrentTaskIndex((prev) => (prev + 1) % tasks.length);
-  };
-
+  }
+  
   useEffect(() => {
     console.log(finishedTasks);
   }, [finishedTasks]);
-
+  
+  useEffect(() => {
+    setAgentsCopy(agents.slice());
+  }, [agents]);
+  
   const rejectTask = () => {
+    setFinishedTasks((prev) => [...prev, [tasks[currentTaskIndex], null]]);
     setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
     setCurrentTaskIndex((prev) => prev % tasks.length);
   };

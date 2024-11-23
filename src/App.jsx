@@ -23,11 +23,12 @@ export default function App() {
     setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
   };
   const generateNextRound = () => {
+    setFinishedTasks([]);
     setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
   }
 
   const addNewAgent = () => {
-    
+
   }
 
   return (

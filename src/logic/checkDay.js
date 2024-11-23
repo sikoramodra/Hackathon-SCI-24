@@ -8,12 +8,16 @@ function checkDay(finished) {
     let isChecked = false;
     let sum = 0;
     finished.forEach(pair => {
+        if(pair[1] == null) {
+            sum-=globalVars.TASK_DECLINE_PENALTY;
+            return;
+        }
         let score = getCompability(pair[0], pair[1])
         console.log("score")
         console.log(score)
 
         if(score < 0.5) {
-            sum -= globalVars.TASK_DECLINE_PENALTY;
+            sum -=pair[0].value; 
             isChecked = true;
             console.log(score);
             console.log(pair);
