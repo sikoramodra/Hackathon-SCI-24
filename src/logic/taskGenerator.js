@@ -1,6 +1,6 @@
 import globalVars from "./globalVariables";
 import Task from "./task";
-import { fakerEN, fakerDE, fakerRU, fakerIT } from "@faker-js/faker";
+import { fakerEN, fakerDE, fakerYO_NG, fakerIT } from "@faker-js/faker";
 const specs = globalVars['SPECIALTIES']
 const reqTypes = [
     'age',
@@ -25,9 +25,13 @@ const generateTask = (difficulty) => {
     requirements.push(['year', __getRandomIntInclusive(globalVars['TIME_START'], globalVars['TIME_END'])]);
 
     const taskDescription = __generateTaskDescription(requirements);
-    console.log(taskDescription);  
-    const task = new Task(taskDescription, requirements, difficulty);
+    const taskValue = __generateTaskValue(difficulty)
+    const task = new Task(taskDescription, requirements, difficulty, taskValue);
     return task;
+}
+
+function __generateTaskValue(difficulty){
+    return Math.round(5 + (1/10 * Math.pow(difficulty, 2)))
 }
 
 function __generateTaskDescription(requirements) {
@@ -91,7 +95,7 @@ function __generateTaskDescription(requirements) {
 
 
 function __generateRandomNationalityName(){
-    const fakers = [fakerDE, fakerEN, fakerRU, fakerIT]
+    const fakers = [fakerDE, fakerEN, fakerYO_NG, fakerIT]
     const faker = fakers[__getRandomIntInclusive(0, fakers.length -1)]
     return faker.person.fullName()
 }
