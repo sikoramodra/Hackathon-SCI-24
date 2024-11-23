@@ -51,7 +51,7 @@ function __generateTaskDescription(requirements) {
         engineer: [
             "Introduce cold fusion to the people of " + fakerEN.location.country(),
             "Build a bridge from " + fakerEN.location.country() + " to " + fakerEN.location.city(),
-            "Hack " + fakerEN.internet.displayName + "'s computer"
+            "Hack " + fakerEN.internet.displayName() + "'s computer"
         ],
         civilian: [
             'Serve ' + fakerEN.food.dish() + ' to ' + targetName,

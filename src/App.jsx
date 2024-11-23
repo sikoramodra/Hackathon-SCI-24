@@ -17,7 +17,7 @@ export default function App() {
 
   const init = () => {
     setAgents(Array.from({ length: 5 }, () => generateAgent(1)));
-    setTasks(Array.from({ length: 3 }, () => generateTask(1)));
+    setTasks(Array.from({ length: 10 }, () => generateTask(1)));
   };
   
   return (
