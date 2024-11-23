@@ -6,7 +6,6 @@ export default function TaskContainer({ tasks, currentTaskIndex }) {
   useEffect(() => {
     if (taskCards.length > tasks.length - 1) {
       setTaskCards((prevItems) => prevItems.slice(0, -1));
-      console.log('deleting card');
     }
   }, [tasks]);
 
@@ -33,7 +32,6 @@ export default function TaskContainer({ tasks, currentTaskIndex }) {
           );
         }),
     );
-    console.log('TaskContainer rendered');
   }, []);
 
   const calculatePosition = () => {

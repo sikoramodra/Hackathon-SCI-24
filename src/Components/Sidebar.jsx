@@ -2,10 +2,10 @@ import agentIcon from '../assets/agent.png';
 
 export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
   return (
-    <div className="w-full h-full overflow-y-auto no-scrollbar">
-      <div className="flex flex-col items-center w-32 gap-4 px-4 pt-4 pb-20 bg-gray-200 h-fit">
+    <div className="no-scrollbar h-full w-full overflow-y-auto">
+      <div className="flex h-fit w-32 flex-col items-center gap-4 bg-gray-200 px-4 pb-40 pt-4">
         {agents.map((val, key) => (
-          <div key={key} className="relative flex align-middle group">
+          <div key={key} className="group relative flex align-middle">
             <img
               className={`h-20 w-20 cursor-pointer rounded ${selectedAgent === key ? 'bg-gray-400' : 'bg-gray-300'} shadow-md"`}
               src={agentIcon}
@@ -14,7 +14,7 @@ export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
                 setSelectedAgent(key);
               }}
             />
-            <div className="absolute hidden w-32 p-2 ml-2 bg-gray-300 rounded shadow-md left-full group-hover:block">
+            <div className="absolute left-full ml-2 hidden w-32 rounded bg-gray-300 p-2 shadow-md group-hover:block">
               <p className="mb-2 text-sm text-gray-600">
                 <span className="font-semibold">Name: </span>
                 {val.fullName}
