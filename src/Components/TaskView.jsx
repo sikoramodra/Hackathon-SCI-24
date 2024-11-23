@@ -6,7 +6,6 @@ import TaskContainer from './TaskContainer.jsx';
 export default function TaskView({
   tasks,
   agents,
-  finishedTasks,
   setFinishedTasks,
   setTasks,
   selectedAgentIndex,
@@ -18,23 +17,47 @@ export default function TaskView({
       ...prev,
       [tasks[currentTaskIndex], agents[selectedAgentIndex]],
     ]);
-    setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
+  
+    const updatedTasks = tasks.filter((_, index) => index !== currentTaskIndex);
+  
+    setTasks(updatedTasks);
     setSelectedAgentIndex(null);
-    setCurrentTaskIndex((prev) => (prev) % tasks.length);
-  }
   
+    if (updatedTasks.length === 0) {
+      setCurrentTaskIndex(0); // Reset if no tasks remain
+    } else {
+      setCurrentTaskIndex((prev) =>
+        prev >= updatedTasks.length ? updatedTasks.length - 1 : prev
+      );
+    }
+  };
+
   useEffect(() => {
-    console.log(finishedTasks);
-  }, [finishedTasks]);
-  
+    console.log('Tasks: ', tasks);
+    console.log('CurrentTask: ', tasks[currentTaskIndex]);
+    console.log('CurrrentTaskIndex: ', currentTaskIndex);
+  }, [tasks]);
+
   const rejectTask = () => {
     setFinishedTasks((prev) => [...prev, [tasks[currentTaskIndex], null]]);
-    setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
-    setCurrentTaskIndex((prev) => prev % tasks.length);
+    const updatedTasks = tasks.filter((_, index) => index !== currentTaskIndex);
+
+    setTasks(updatedTasks);
+
+    if (updatedTasks.length === 0) {
+      setCurrentTaskIndex(0); // Reset to 0 if no tasks remain
+    } else {
+      setCurrentTaskIndex((prev) =>
+        prev >= updatedTasks.length ? updatedTasks.length - 1 : prev,
+      );
+    }
   };
 
   const nextTask = () => {
-    setCurrentTaskIndex((prev) => (prev + 1) % tasks.length);
+    setCurrentTaskIndex((prev) => {
+      const nextIndex = (prev + 1) % tasks.length;
+      return tasks.length > 0 ? nextIndex : 0; // Handle empty tasks array
+    });
   };
 
   const currentTask = tasks[currentTaskIndex];
