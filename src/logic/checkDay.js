@@ -15,21 +15,23 @@ function checkDay(finished) {
         if(score < 0.5) {
             sum -=pair[0].value; 
             isChecked = true;
-            console.log(score);
-            console.log(pair); 
-            a.push(pair[0])
-            a.push(pair[1])
+            a.push(pair);
         } else {
             sum+=pair[0].value;
         }
     });
     
+    console.log('Sum:', sum, 'isChecked:', isChecked);
     if(isChecked) {
-        a.unshift(sum);
-        
-        return a;
+        return {
+            sum: sum,
+            failedTasks: a
+        };
     } else {
-        return [sum];
+        return {
+            sum: sum,
+            failedTasks: null
+        };
     }
 }
 

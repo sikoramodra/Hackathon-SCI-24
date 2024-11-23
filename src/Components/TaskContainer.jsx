@@ -20,7 +20,7 @@ export default function TaskContainer({ tasks, currentTaskIndex, nextTask }) {
           return (
             <div
               key={index}
-              className="absolute h-64 w-52 bg-gray-200 shadow-md"
+              className="absolute h-64 bg-gray-200 shadow-md w-52"
               style={{
                 transform: `rotate(${calculateRotation()}deg)`,
               }}
@@ -36,7 +36,7 @@ export default function TaskContainer({ tasks, currentTaskIndex, nextTask }) {
   };
 
   return (
-    <div className="relative mx-auto h-full w-5/6 rounded-xl bg-[#eed6b4] p-4">
+    <div className="relative mx-auto h-72 w-64  rounded-xl bg-[#eed6b4] p-4">
       {taskCards}
       <div className='absolute text-2xl text-gray-400 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer select-none top-1/2 left-1/2 hover:text-gray-500' onClick={nextTask}>
         Take Next

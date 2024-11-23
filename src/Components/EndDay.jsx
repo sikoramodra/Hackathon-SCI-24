@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
 import checkDay from '../logic/checkDay';
-import CurrentTask from './CurrentTask';
-import TaskContainer from './TaskContainer';
-import Task from '../logic/task';
-import Agent from '../logic/agent';
 
 export default function EndDay({
     finishedTasks,
@@ -11,13 +7,16 @@ export default function EndDay({
     setMoney,
     generateNextRound,
 }) {
-    const [a, setA] = useState([0, 0, 0]);
+    const [failedTasks, setFailedTasks] = useState(null);
+    const [profit, setProfit] = useState(0);
 
     useEffect(() => {
         const result = checkDay(finishedTasks);
-        setMoney(money + result[0]);
+        console.log('Result:',  result);
+        setMoney(money + result.sum);
+        setProfit(result.sum);
 
-        setA(result);
+        setFailedTasks(result.failedTasks);
     }, [finishedTasks]);
 
     return (
@@ -25,25 +24,21 @@ export default function EndDay({
             <div className="p-4 mb-6 text-gray-800 bg-gray-200 border-l-4 border-gray-500 rounded-lg">
                 <h3 className="text-xl font-semibold">You earned:</h3>
                 <p className="text-lg">
-                    You earned <strong>{a[0]}</strong> money today.
+                    You earned <strong>{profit}</strong> money today.
                 </p>
                 <p className="mt-2 text-md">
                     Your total money is: <strong>{money}</strong>
                 </p>
             </div>
-            {a.length > 1 && (
                 <div className="flex flex-col space-y-8">
                     {/* Loop from 1 to a.length, incrementing by 2 */}
-                    {Array.from({ length: Math.floor(a.length / 2) }).map((_, i) => {
-                        const taskIndex = i * 2 + 1; // `i` corresponds to task index
-                        const agentIndex = taskIndex + 1; // Next index corresponds to agent
-
+                    {failedTasks && failedTasks.map(([task, agent], i) => {
                         return (
                             <div key={i} className="flex justify-between space-x-8">
                                 {/* Task Details (Left) */}
-                                <div className="flex-1 p-4 bg-gray-200 rounded-lg shadow-sm">
+                                <div className="flex-1 p-4 rounded-lg shadow-sm">
                                     <h4 className="text-lg font-semibold">Task Details</h4>
-                                    {a[taskIndex]?.requirements && a[taskIndex]?.requirements.map((element, index) => (
+                                    {task.requirements.map((element, index) => (
                                         <div key={index} className="mt-4">
                                             <p><strong>Requirement:</strong> {element[0]}</p>
                                             <p><strong>Description:</strong> {element[1]}</p>
@@ -55,11 +50,11 @@ export default function EndDay({
                                 <div className="flex-1 p-4 bg-gray-200 rounded-lg shadow-sm">
                                     <h4 className="text-lg font-semibold">Agent Details</h4>
                                     <div className="mt-4">
-                                        {a[agentIndex]?.sex && <p><strong>Sex:</strong> {a[agentIndex]?.sex}</p>}
-                                        {a[agentIndex]?.age && <p><strong>Age:</strong> {a[agentIndex]?.age}</p>}
-                                        {a[agentIndex]?.spec && <p><strong>Specialization:</strong> {a[agentIndex]?.spec}</p>}
-                                        {(a[agentIndex]?.effectiveRangeStart && a[agentIndex]?.effectiveRangeEnd) &&
-                                            <p><strong>Effective Range:</strong> {a[agentIndex]?.effectiveRangeStart} to {a[agentIndex]?.effectiveRangeEnd}</p>
+                                        {agent.sex && <p><strong>Sex:</strong> {agent.sex}</p>}
+                                        {agent.age && <p><strong>Age:</strong> {agent.age}</p>}
+                                        {agent.spec && <p><strong>Specialization:</strong> {agent.spec}</p>}
+                                        {(agent.effectiveRangeStart && agent.effectiveRangeEnd) &&
+                                            <p><strong>Effective Range:</strong> {agent.effectiveRangeStart} to {agent.effectiveRangeEnd}</p>
                                         }
                                     </div>
                                 </div>
@@ -67,8 +62,6 @@ export default function EndDay({
                         );
                     })}
                 </div>
-            )}
-
             <div className="flex justify-center mt-6">
                 <button
                     onClick={generateNextRound}
