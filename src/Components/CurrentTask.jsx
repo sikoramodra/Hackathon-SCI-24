@@ -1,10 +1,9 @@
 import folderImage from '../assets/folder.png';
-// import paper from '../assets/paper.jpg';
 
 export default function CurrentTask({
   currentTask,
   selectedAgentIndex,
-  agents
+  agents,
 }) {
   return (
     <>
@@ -14,10 +13,14 @@ export default function CurrentTask({
         alt=""
       />
 
-      <div className="z-10 flex flex-col items-start justify-center w-1/3 ml-auto mr-8 bg-gray-200 rounded">
+      <div
+        className="z-10 ml-auto mr-8 flex w-1/3 flex-col items-start justify-center bg-gray-200 shadow-md"
+        style={{
+          transform: `rotate(${Math.floor(Math.random() * 20) + -10}deg)`,
+        }}
+      >
         {selectedAgentIndex === null ? null : (
           <div className="p-2">
-            {/*<img src={paper} alt="" className="absolute" />*/}
             <p className="mb-2 text-sm text-gray-600">
               <span className="font-semibold">Name: </span>
               {agents[selectedAgentIndex]?.fullName}
@@ -42,8 +45,8 @@ export default function CurrentTask({
           </div>
         )}
       </div>
-      <div className="relative z-10 w-2/5 p-6 mr-auto h-3/5">
-        <h2 className="mb-4 text-xl font-semibold text-center text-gray-700">
+      <div className="relative z-10 mr-auto h-3/5 w-2/5 p-6">
+        <h2 className="mb-4 text-center text-xl font-semibold text-gray-700">
           {currentTask.description}
         </h2>
         <div className="space-y-2">

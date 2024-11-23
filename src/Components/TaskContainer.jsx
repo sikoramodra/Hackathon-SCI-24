@@ -16,11 +16,11 @@ export default function TaskContainer({ tasks, currentTaskIndex }) {
     setTaskCards(
       tasks
         .filter((_, index) => index !== currentTaskIndex)
-        .map((_, index) => {
+        .map((task, index) => {
           return (
             <div
               key={index}
-              className="absolute h-64 w-52 rounded-lg border-2 border-black bg-[#f2f7ff]"
+              className="absolute h-64 w-52 bg-gray-200 shadow-md"
               style={{
                 right: `${calculatePosition()}px`,
                 top: `${calculatePosition()}px`,
@@ -43,7 +43,7 @@ export default function TaskContainer({ tasks, currentTaskIndex }) {
   };
 
   return (
-    <div className="relative mx-auto h-3/5 w-5/6 rounded-xl bg-[#eed6b4] p-4">
+    <div className="relative mx-auto h-full w-5/6 rounded-xl bg-[#eed6b4] p-4">
       {taskCards}
     </div>
   );
