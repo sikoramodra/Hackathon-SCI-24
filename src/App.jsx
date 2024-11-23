@@ -7,7 +7,7 @@ import generateTask from './logic/taskGenerator.js';
 import EndDay from './Components/EndDay.jsx';
 
 export default function App() {
-   
+  const [agentsSize, setAgentsSize] = useState(1);
   const [money, setMoney] = useState(100);
   const [agents, setAgents] = useState([]);
   const [tasks, setTasks] = useState([]);
@@ -19,23 +19,26 @@ export default function App() {
   }, []);
 
   const init = () => {
-    setAgents(Array.from({ length: 5 }, () => generateAgent(1)));
-    setTasks(Array.from({ length: 1 }, () => generateTask(1)));
+    setAgents(Array.from({ length: agentsSize }, () => generateAgent(1)));
+    setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
   };
-  
+  const generateNextRound = () => {
+    setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
+  }
+
   return (
-    tasks.length === 0 ? <EndDay finishedTasks={finishedTasks} money={money} setMoney={setMoney}></EndDay> :
-    <div className="flex w-full h-full bg-gray-100">
-      <div className="w-1/3 h-full">
-        <Sidebar
-          agents={agents}
-          setSelectedAgent={setSelectedAgentIndex}
-          selectedAgent={selectedAgentIndex}
-        />
+    tasks.length === 0 ? <EndDay finishedTasks={finishedTasks} money={money} setMoney={setMoney} generateNextRound={generateNextRound}></EndDay> :
+      <div className="flex w-full h-full bg-gray-100">
+        <div className="w-1/3 h-full">
+          <Sidebar
+            agents={agents}
+            setSelectedAgent={setSelectedAgentIndex}
+            selectedAgent={selectedAgentIndex}
+          />
+        </div>
+        <div className="w-full h-full">
+          <TaskView tasks={tasks} agents={agents} finishedTasks={finishedTasks} setFinishedTasks={setFinishedTasks} setAgents={setAgents} setTasks={setTasks} selectedAgentIndex={selectedAgentIndex} setSelectedAgentIndex={setSelectedAgentIndex} />
+        </div>
       </div>
-      <div className="w-full h-full">
-        <TaskView tasks={tasks} agents={agents} finishedTasks={finishedTasks} setFinishedTasks={setFinishedTasks} setAgents={setAgents} setTasks={setTasks} selectedAgentIndex={selectedAgentIndex} setSelectedAgentIndex={setSelectedAgentIndex} />
-      </div>
-    </div>
   );
 }
