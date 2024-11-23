@@ -5,7 +5,7 @@ const globalVars = {
     MAX_AGE: 70,
     SPECIALTIES: [
         'medic',
-        'spy',
+        'subterfugist',
         'killer',
         'engineer',
     ],

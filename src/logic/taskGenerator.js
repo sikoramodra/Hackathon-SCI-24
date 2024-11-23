@@ -26,12 +26,61 @@ const generateTask = (difficulty) => {
 
     const taskDescription = __generateTaskDescription(requirements);
     const taskValue = __generateTaskValue(difficulty)
-    const task = new Task(taskDescription, requirements, difficulty, taskValue);
+    const taskClues = __generateTaskClues(requirements)
+    const task = new Task(taskDescription, requirements, difficulty, taskValue, taskClues);
     return task;
 }
 
 function __generateTaskValue(difficulty){
     return Math.round(5 + (1/10 * Math.pow(difficulty, 2)))
+}
+
+function __generateTaskClues(requirements) {
+    let taskClues = '';
+    console.log(requirements);
+
+    requirements.forEach((req) => {
+        const value = req[1]; // The value is the second element of the requirement array
+        switch (req[0]) { // req[0] is the type (e.g., 'age', 'spec', 'sex', 'year')
+            case 'year':
+                const yearClues = [
+                    'This mission takes place in ' + value + ". ",
+                    "Someone who has an expertise working around the year " + value + " would be needed for this mission.",
+                    "An agent with experience working around the year " + value + " would be preferred."
+                ];
+                taskClues += yearClues[__getRandomIntInclusive(0, yearClues.length - 1)];
+                break;
+
+            case 'age':
+                const ageClues = [
+                    'The ideal agent for this mission would be around ' + value + ' years old. ',
+                    "We need an agent who is roughly " + value + " years old for this mission. ",
+                    "No one would bat an eyelid if the agent was around " + value + '. '
+                ];
+                taskClues += ageClues[__getRandomIntInclusive(0, ageClues.length - 1)];
+                break;
+
+            case 'spec':
+                const specClues = [
+                    'A(n) ' + value + ' would be perfect for this. ',
+                    "Do we have any " + value + "s on staff for this? ",
+                    "This mission should probably be assigned to a(n) " + value + " of some sort. "
+                ];
+                taskClues += specClues[__getRandomIntInclusive(0, specClues.length - 1)];
+                break;
+
+            case 'sex':
+                const sexClues = [
+                    'This mission is to be done in a ' + value + "-only area. ",
+                    "A " + value + " would blend in perfectly in the crowd. ",
+                    value.charAt(0).toUpperCase() + value.slice(1) + "s would be preferred. "
+                ];
+                taskClues += sexClues[__getRandomIntInclusive(0, sexClues.length - 1)];
+                break;
+        }
+    });
+
+    return taskClues;
 }
 
 function __generateTaskDescription(requirements) {
@@ -42,7 +91,7 @@ function __generateTaskDescription(requirements) {
             'Cure ' + targetName + "'s amolastasis",
             'Bring ' + targetName + ' back to life'
         ],
-        spy: [
+        subterfugists: [
             'Blackmail ' + targetName,
             'Infiltrate ' + targetName + "'s compound",
             'Send ' + targetName + ' to ' + fakerEN.location.country(),
