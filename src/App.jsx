@@ -143,6 +143,7 @@ export default function App() {
               setFinishedTasks={setFinishedTasks}
               setAgents={setAgents}
               setTasks={setTasks}
+              dayCount={dayCount}
               selectedAgentIndex={selectedAgentIndex}
               setSelectedAgentIndex={setSelectedAgentIndex}
             />

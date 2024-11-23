@@ -12,6 +12,7 @@ export default function TaskView({
   setFinishedTasks,
   setAgents,
   setTasks,
+  dayCount,
   selectedAgentIndex,
   setSelectedAgentIndex,
 }) {
@@ -67,7 +68,7 @@ export default function TaskView({
   };
 
   const addNewAgent = () => {
-    setMoney(money - 20);
+    setMoney(money - 50);
     setAgents((prevAgents) => [...prevAgents, agentGenerator(1)]);
   };
 
@@ -75,25 +76,26 @@ export default function TaskView({
   const isAgentSelected = selectedAgentIndex !== null;
 
   return (
-    <div className="grid h-full w-full grid-cols-3 grid-rows-3">
-      <div className="col-start-3 row-span-2 row-start-1 flex items-start pt-8">
+    <div className="grid w-full h-full grid-cols-3 grid-rows-3">
+      <div className="flex items-start col-start-3 row-span-2 row-start-1 pt-8">
         <TaskContainer
           tasks={tasks}
           currentTaskIndex={currentTaskIndex}
           nextTask={nextTask}
         />
       </div>
-      <div className="flex items-center justify-center rounded-lg">
+      <div className="relative flex items-center justify-center rounded-lg">
         <Buttons
           money={money}
           addNewAgent={addNewAgent}
           submitTask={submitTask}
+          dayCount={dayCount}
           nextTask={nextTask}
           rejectTask={rejectTask}
           isAgentSelected={isAgentSelected}
         />
       </div>
-      <div className="col-span-2 row-span-3 row-start-1 flex items-center justify-center">
+      <div className="flex items-center justify-center col-span-2 row-span-3 row-start-1">
         <CurrentTask
           currentTask={currentTask}
           selectedAgentIndex={selectedAgentIndex}

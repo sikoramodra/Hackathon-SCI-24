@@ -46,8 +46,8 @@ export default function CurrentTask({
           </div>
         )}
       </div>
-      <div className="relative z-10 -mt-4 mr-auto h-3/5 w-2/5 p-6">
-        <h2 className="mb-4 overflow-hidden text-center text-xl font-semibold text-gray-700">
+      <div className="relative z-10 mr-auto h-1/2 w-2/5 p-6">
+        <h2 className="shadows-into-light-regular mb-4 overflow-hidden text-center text-xl font-semibold text-gray-700">
           {currentTask.description}
         </h2>
         <div className="space-y-2">

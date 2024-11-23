@@ -35,7 +35,12 @@ export default function EndGame({ dayCount, setShowEndGame, init }) {
         </div>
         <div>
           <p className="text-3xl">Better luck next time!</p>
-          <button onClick={handleNewGame}>Start new game</button>
+          <div
+            className="pt-20 pl-2 text-2xl text-center text-gray-400 underline cursor-pointer select-none hover:text-gray-500"
+            onClick={handleNewGame}
+          >
+            Start new game
+          </div>
         </div>
       </div>
       <div className="absolute z-40"></div>

@@ -6,20 +6,30 @@ import agent_0_man from '../assets/avatar_0_man_secret.png';
 import agent_1_man from '../assets/avatar_1_man_secret.png';
 import agent_2_man from '../assets/avatar_2_man_secret.png';
 import agent_3_man from '../assets/avatar_3_man_secret.png';
-import agentIcon from '../assets/agent.png';
 import eraCheck from '../logic/yearEraCheck';
 
 export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
   const timeRanges = [0, 1000, 2000, 3000];
-  const agentIcons = [agent_0_woman, agent_1_woman, agent_2_woman, agent_3_woman, agent_0_man, agent_1_man, agent_2_man, agent_3_man];
+  const agentIcons = [
+    agent_0_woman,
+    agent_1_woman,
+    agent_2_woman,
+    agent_3_woman,
+    agent_0_man,
+    agent_1_man,
+    agent_2_man,
+    agent_3_man,
+  ];
   const calculateImage = (agent) => {
     for (let i = 0; i < timeRanges.length; i++) {
-      if ((agent.effectiveRangeStart + agent.effectiveRangeEnd) / 2 < timeRanges[i]) {
+      if (
+        (agent.effectiveRangeStart + agent.effectiveRangeEnd) / 2 <
+        timeRanges[i]
+      ) {
         return agentIcons[agent.sex == 'male' ? 4 + i : i];
       }
     }
-    return 
-  }
+  };
 
   return (
     <div className="w-full h-full overflow-y-auto no-scrollbar">
@@ -27,14 +37,17 @@ export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
         {agents.map((val, key) => (
           <div key={key} className="relative flex align-middle group">
             <img
-              className={`h-20 w-20 cursor-pointer rounded ${selectedAgent === key ? 'bg-gray-400' : 'bg-gray-300'} shadow-md"`}
+              className={`h-20 w-20 cursor-pointer rounded overflow-hidden ${
+                selectedAgent === key ? 'bg-gray-400 scale-110' : 'bg-gray-300'
+              } shadow-md transition-transform duration-300 ease-in-out transform 
+              hover:scale-[1] hover:object-scale-110`}
               src={calculateImage(val)}
               alt="agent"
               onClick={() => {
                 setSelectedAgent(key);
               }}
             />
-            <div className="absolute hidden w-32 p-2 ml-2 bg-gray-300 rounded shadow-md left-full group-hover:block">
+            <div className="absolute hidden p-2 ml-4 bg-gray-300 rounded shadow-md left-full w-60 group-hover:block">
               <p className="mb-2 text-sm text-gray-600">
                 <span className="font-semibold">Name: </span>
                 {val.fullName}
@@ -53,7 +66,8 @@ export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
               </p>
               <p className="mb-2 text-sm text-gray-600">
                 <span className="font-semibold">Most effective in years: </span>
-                {eraCheck(val.effectiveRangeStart)} - {eraCheck(val.effectiveRangeEnd)}
+                {eraCheck(val.effectiveRangeStart)} -{' '}
+                {eraCheck(val.effectiveRangeEnd)}
               </p>
             </div>
           </div>
