@@ -39,6 +39,7 @@ export default function EndDay({
             </div>
             <div class="flex">
                 <div className="flex flex-col space-y-8">
+                    {console.log(correctTasks)}
                     {correctTasks && correctTasks.map(([task, agent, score], i) => {
                         return (
                             <div className='bg-green-200 m-4 p-6'>

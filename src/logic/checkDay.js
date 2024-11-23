@@ -21,10 +21,11 @@ function checkDay(finished) {
             item.push(score)
             wrong.push(item);
         } else {
+            isChecked = true;
+            sum+=pair[0].value;
             item = pair.slice();
             item.push(score)
             correct.push(item)
-            sum+=pair[0].value;
         }
     });
     
