@@ -22,7 +22,7 @@ export default function TaskView({
     setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
     setAgentsCopy((prev) => prev.filter((_, index) => index !== selectedAgentIndex));
     setSelectedAgentIndex(null);
-    setCurrentTaskIndex((prev) => (prev + 1) % tasks.length);
+    setCurrentTaskIndex((prev) => (prev) % tasks.length);
   }
   
   useEffect(() => {
