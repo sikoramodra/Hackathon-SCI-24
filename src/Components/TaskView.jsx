@@ -7,6 +7,7 @@ export default function TaskView({
   tasks,
   agents,
   setFinishedTasks,
+  setAgents,
   setTasks,
   selectedAgentIndex,
   setSelectedAgentIndex,
@@ -17,10 +18,9 @@ export default function TaskView({
       ...prev,
       [tasks[currentTaskIndex], agents[selectedAgentIndex]],
     ]);
-  
-    const updatedTasks = tasks.filter((_, index) => index !== currentTaskIndex);
-  
-    setTasks(updatedTasks);
+    setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
+    setAgents((prev) => prev.filter((_, index) => index !== selectedAgentIndex));
+    
     setSelectedAgentIndex(null);
   
     if (updatedTasks.length === 0) {

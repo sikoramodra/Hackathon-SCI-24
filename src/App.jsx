@@ -6,7 +6,7 @@ import generateTask from './logic/taskGenerator.js';
 import EndDay from './Components/EndDay.jsx';
 
 export default function App() {
-  const [agentsSize, setAgentsSize] = useState(10);
+  const [agentsSize, setAgentsSize] = useState(7);
   const [money, setMoney] = useState(100);
   const [agents, setAgents] = useState([]);
   const [tasks, setTasks] = useState([]);
@@ -22,17 +22,25 @@ export default function App() {
     setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
   };
   const generateNextRound = () => {
+    finishedTasks.forEach(element => {
+      if(element[1] !== null) {
+        setAgents(prevAgents => [...prevAgents, element[1]]);
+      }
+    });
     setFinishedTasks([]);
     setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
   };
 
-  const addNewAgent = () => {};
+  const addNewAgent = () => {
+    setAgents(prevAgents => [...prevAgents, generateAgent(1)])
+  };
 
   return tasks.length === 0 ? (
     <EndDay
       finishedTasks={finishedTasks}
       money={money}
       setMoney={setMoney}
+      addNewAgent={addNewAgent}
       generateNextRound={generateNextRound}
     ></EndDay>
   ) : (
