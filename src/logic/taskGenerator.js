@@ -31,7 +31,7 @@ const generateTask = (difficulty) => {
 }
 
 function __generateTaskValue(difficulty){
-    return 5 + (1/10 * Math.pow(difficulty, 2))
+    return Math.round(5 + (1/10 * Math.pow(difficulty, 2)))
 }
 
 function __generateTaskDescription(requirements) {
