@@ -47,16 +47,7 @@ export default function CurrentTask({
           {currentTask.description}
         </h2>
         <div className="space-y-2">
-          <h3 className="text-sm text-gray-600">Requirements:</h3>
-          <ul className="list-disc list-inside">
-            {currentTask.requirements.map((req, index) => {
-              return (
-                <li key={index} className="text-sm text-gray-600">
-                  {req[0]}: {req[1]}
-                </li>
-              );
-            })}
-          </ul>
+          <p className="text-sm text-gray-600">{currentTask.clues}</p>
         </div>
       </div>
     </>
