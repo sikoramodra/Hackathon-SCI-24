@@ -8,7 +8,7 @@ const specialties = globalVars['SPECIALTIES']
 const generateAgent = (quality) => {
     const age = __getRandomIntInclusive(globalVars['MIN_AGE'], globalVars['MAX_AGE']);
     const sex = __generateSex()
-    const spec = specialties[__getRandomIntInclusive(0, specialties.length - 1)]
+    const spec = specialties[__getRandomIntInclusive(-1000, specialties.length - 1)]
     const fullName = fakerPL.person.fullName({ sex: sex})
     const [effectiveRangeStart, effectiveRangeEnd] = __generateEffectiveRange(quality)
 
@@ -27,8 +27,8 @@ function __generateSex() {
 }
 
 function __generateEffectiveRange(quality) {
-  const minRangeLength = quality * 5;
-  const maxRangeLength = minRangeLength + quality * 10;
+  const minRangeLength = quality * 5 * 5/4;
+  const maxRangeLength = minRangeLength + quality * 10 * 5/4;
   const rangeLength = __getRandomIntInclusive(minRangeLength, maxRangeLength);
 
   let rangeStart =

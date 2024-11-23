@@ -7,6 +7,7 @@ import EndDay from './Components/EndDay.jsx';
 import desk from './assets/desk.png';
 
 export default function App() {
+  const [dayCount, setDayCount] = useState(1);
   const [agentsSize, setAgentsSize] = useState(7);
   const [money, setMoney] = useState(100);
   const [agents, setAgents] = useState([]);
@@ -23,14 +24,41 @@ export default function App() {
     setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
   };
   const generateNextRound = () => {
+    setDayCount(dayCount + 1);
     finishedTasks.forEach((element) => {
+      console.log(element)
       if (element[1] !== null) {
         setAgents((prevAgents) => [...prevAgents, element[1]]);
       }
     });
     setFinishedTasks([]);
-    setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
+    setTasks(Array.from({ length: agentsSize }, () => generateTask(generateTaskDifficulty(dayCount))));
+    if(agents.length - 1 < agentsSize){
+      const newgenAgentQuality = generateAgentQuality(dayCount)
+      const agentsToGenerate = agentsSize - agents.length - 1
+      let generatedAgents = []
+      for(let i = 0; i < agentsToGenerate; i++){
+        generatedAgents.push(generateAgent(newgenAgentQuality))
+      }
+      setAgents(agents.concat(generatedAgents))
+    }
   };
+
+  const generateTaskDifficulty = (dayCount) =>{
+    let difficulty = Math.round(0.9 * dayCount)
+    if(difficulty > 20){
+      difficulty = 20;
+    }
+    return difficulty
+  }
+
+  const generateAgentQuality = (dayCount) => {
+    let quality = Math.round(0.7 * dayCount)
+    if(quality > 20){
+      quality = 20
+    }
+    return quality
+  }
 
   const addNewAgent = () => {
     setAgents((prevAgents) => [...prevAgents, generateAgent(1)]);
