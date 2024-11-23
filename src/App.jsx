@@ -1,4 +1,3 @@
-
 import TaskView from './Components/TaskView.jsx';
 import Sidebar from './Components/Sidebar.jsx';
 import { useEffect, useState } from 'react';
@@ -7,7 +6,7 @@ import generateTask from './logic/taskGenerator.js';
 import EndDay from './Components/EndDay.jsx';
 
 export default function App() {
-  const [agentsSize, setAgentsSize] = useState(1);
+  const [agentsSize, setAgentsSize] = useState(10);
   const [money, setMoney] = useState(100);
   const [agents, setAgents] = useState([]);
   const [tasks, setTasks] = useState([]);
@@ -25,25 +24,38 @@ export default function App() {
   const generateNextRound = () => {
     setFinishedTasks([]);
     setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
-  }
+  };
 
-  const addNewAgent = () => {
+  const addNewAgent = () => {};
 
-  }
-
-  return (
-    tasks.length === 0 ? <EndDay finishedTasks={finishedTasks} money={money} setMoney={setMoney} generateNextRound={generateNextRound}></EndDay> :
-      <div className="flex w-full h-full bg-gray-100">
-        <div className="w-1/3 h-full">
-          <Sidebar
-            agents={agents}
-            setSelectedAgent={setSelectedAgentIndex}
-            selectedAgent={selectedAgentIndex}
-          />
-        </div>
-        <div className="w-full h-full">
-          <TaskView tasks={tasks} agents={agents} finishedTasks={finishedTasks} setFinishedTasks={setFinishedTasks} setAgents={setAgents} setTasks={setTasks} selectedAgentIndex={selectedAgentIndex} setSelectedAgentIndex={setSelectedAgentIndex} />
-        </div>
+  return tasks.length === 0 ? (
+    <EndDay
+      finishedTasks={finishedTasks}
+      money={money}
+      setMoney={setMoney}
+      generateNextRound={generateNextRound}
+    ></EndDay>
+  ) : (
+    <div className="flex h-full w-full bg-gray-100">
+      <div className="h-full w-1/3">
+        <Sidebar
+          agents={agents}
+          setSelectedAgent={setSelectedAgentIndex}
+          selectedAgent={selectedAgentIndex}
+        />
       </div>
+      <div className="h-full w-full">
+        <TaskView
+          tasks={tasks}
+          agents={agents}
+          finishedTasks={finishedTasks}
+          setFinishedTasks={setFinishedTasks}
+          setAgents={setAgents}
+          setTasks={setTasks}
+          selectedAgentIndex={selectedAgentIndex}
+          setSelectedAgentIndex={setSelectedAgentIndex}
+        />
+      </div>
+    </div>
   );
 }
