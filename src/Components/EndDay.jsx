@@ -42,7 +42,7 @@ export default function EndDay({
                             <div key={i} className="flex justify-between space-x-8">
                                 {/* Task Details (Left) */}
                                 <div className="flex-1 p-4 bg-gray-200 rounded-lg shadow-sm">
-                                    <h4 className="font-semibold text-lg">Task Details</h4>
+                                    <h4 className="text-lg font-semibold">Task Details</h4>
                                     {a[taskIndex]?.requirements && a[taskIndex]?.requirements.map((element, index) => (
                                         <div key={index} className="mt-4">
                                             <p><strong>Requirement:</strong> {element[0]}</p>
@@ -53,7 +53,7 @@ export default function EndDay({
 
                                 {/* Agent Details (Right) */}
                                 <div className="flex-1 p-4 bg-gray-200 rounded-lg shadow-sm">
-                                    <h4 className="font-semibold text-lg">Agent Details</h4>
+                                    <h4 className="text-lg font-semibold">Agent Details</h4>
                                     <div className="mt-4">
                                         {a[agentIndex]?.sex && <p><strong>Sex:</strong> {a[agentIndex]?.sex}</p>}
                                         {a[agentIndex]?.age && <p><strong>Age:</strong> {a[agentIndex]?.age}</p>}

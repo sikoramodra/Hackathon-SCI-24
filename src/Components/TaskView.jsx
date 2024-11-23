@@ -67,12 +67,11 @@ export default function TaskView({
   return (
     <div className="grid w-full h-full grid-cols-3 grid-rows-3">
       <div className="flex items-start col-start-3 row-span-2 row-start-1 pt-8">
-        <TaskContainer tasks={tasks} currentTaskIndex={currentTaskIndex} />
+        <TaskContainer tasks={tasks} currentTaskIndex={currentTaskIndex} nextTask={nextTask}/>
       </div>
       <div className="flex items-center justify-center rounded-lg">
         <Buttons
           submitTask={submitTask}
-          nextTask={nextTask}
           rejectTask={rejectTask}
           isAgentSelected={isAgentSelected}
         />

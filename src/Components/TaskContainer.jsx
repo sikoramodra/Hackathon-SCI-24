@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function TaskContainer({ tasks, currentTaskIndex }) {
+export default function TaskContainer({ tasks, currentTaskIndex, nextTask }) {
   const [taskCards, setTaskCards] = useState([]);
 
   useEffect(() => {
@@ -22,21 +22,14 @@ export default function TaskContainer({ tasks, currentTaskIndex }) {
               key={index}
               className="absolute h-64 w-52 bg-gray-200 shadow-md"
               style={{
-                right: `${calculatePosition()}px`,
-                top: `${calculatePosition()}px`,
                 transform: `rotate(${calculateRotation()}deg)`,
               }}
             >
-              Req
             </div>
           );
         }),
     );
   }, []);
-
-  const calculatePosition = () => {
-    return Math.floor(Math.random() * 30) + 20;
-  };
 
   const calculateRotation = () => {
     return Math.floor(Math.random() * 20) + -10;
@@ -45,6 +38,9 @@ export default function TaskContainer({ tasks, currentTaskIndex }) {
   return (
     <div className="relative mx-auto h-full w-5/6 rounded-xl bg-[#eed6b4] p-4">
       {taskCards}
+      <div className='absolute text-2xl text-gray-400 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer select-none top-1/2 left-1/2 hover:text-gray-500' onClick={nextTask}>
+        Take Next
+      </div>
     </div>
   );
 }
