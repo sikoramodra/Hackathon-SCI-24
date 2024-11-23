@@ -74,7 +74,7 @@ export default function EndDay({
                     {failedTasks && failedTasks.map(([task, agent, score], i) => {
                         return (
                             <div key={i} className='p-6 m-4 bg-red-200'>
-                                Score: {(score * 100).toString().slice(0, 4)}%
+                                Chances of winning: {(score * 100).toString().slice(0, 4)}%
                                 <div key={i} className="flex justify-between space-x-8">
                                     <div className="flex-1 p-4 rounded-lg shadow-sm">
                                         <h4 className="text-lg font-semibold">Task Details</h4>
