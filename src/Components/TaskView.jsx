@@ -13,14 +13,12 @@ export default function TaskView({
   setSelectedAgentIndex,
 }) {
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
-  const [agentsCopy, setAgentsCopy] = useState([]);
   const submitTask = () => {
     setFinishedTasks((prev) => [
       ...prev,
       [tasks[currentTaskIndex], agents[selectedAgentIndex]],
     ]);
     setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
-    setAgentsCopy((prev) => prev.filter((_, index) => index !== selectedAgentIndex));
     setSelectedAgentIndex(null);
     setCurrentTaskIndex((prev) => (prev) % tasks.length);
   }
@@ -28,10 +26,6 @@ export default function TaskView({
   useEffect(() => {
     console.log(finishedTasks);
   }, [finishedTasks]);
-  
-  useEffect(() => {
-    setAgentsCopy(agents.slice());
-  }, [agents]);
   
   const rejectTask = () => {
     setFinishedTasks((prev) => [...prev, [tasks[currentTaskIndex], null]]);
