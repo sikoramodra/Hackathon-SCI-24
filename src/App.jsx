@@ -5,6 +5,7 @@ import generateAgent from './logic/agentGenerator.js';
 import generateTask from './logic/taskGenerator.js';
 import EndDay from './Components/EndDay.jsx';
 import desk from './assets/desk.png';
+import EndGame from './Components/EndGame.jsx';
 
 export default function App() {
   const [dayCount, setDayCount] = useState(1);
@@ -16,65 +17,81 @@ export default function App() {
   const [finishedTasks, setFinishedTasks] = useState([]);
   const [failedTasks, setFailedTasks] = useState(null);
   const [correctTasks, setCorrectTasks] = useState(null);
+  const [showEndGame, setShowEndGame] = useState(false);
+
   useEffect(() => {
     init();
   }, []);
 
+  useEffect(() => {
+    if (money < 0) {
+      setShowEndGame(true);
+    }
+  }, [money]);
+
   const init = () => {
     setAgents(Array.from({ length: agentsSize }, () => generateAgent(1)));
     setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
+    setMoney(100);
   };
 
-  const generateNextRound = () => {  
+  const generateNextRound = () => {
     setDayCount(dayCount + 1);
-  
+
     finishedTasks.forEach((element) => {
       let survived = true;
       if (element[1] && element[1].fullName !== null) {
-        {failedTasks && failedTasks.map(([task, agent, score], i) => {
-          console.log(agent.fullName)
-          if(agent.fullName === element[1].fullName) {
-            survived = false;
-          }
-        })}
+        {
+          failedTasks &&
+            // eslint-disable-next-line no-unused-vars
+            failedTasks.map(([task, agent, score], i) => {
+              console.log(agent.fullName);
+              if (agent.fullName === element[1].fullName) {
+                survived = false;
+              }
+            });
+        }
         if (survived) {
           setAgents((prevAgents) => [...prevAgents, element[1]]);
         }
       }
     });
-    setAgentsSize(agents.length)
+    setAgentsSize(agents.length);
     setFinishedTasks([]);
-    setTasks(Array.from({ length: agentsSize }, () => generateTask(generateTaskDifficulty(dayCount))));
-    if(agents.length - 1 < agentsSize){
-      const newgenAgentQuality = generateAgentQuality(dayCount)
-      const agentsToGenerate = agentsSize - agents.length - 1
-      let generatedAgents = []
-      for(let i = 0; i < agentsToGenerate; i++){
-        generatedAgents.push(generateAgent(newgenAgentQuality))
+    setTasks(
+      Array.from({ length: agentsSize }, () =>
+        generateTask(generateTaskDifficulty(dayCount)),
+      ),
+    );
+    if (agents.length - 1 < agentsSize) {
+      const newgenAgentQuality = generateAgentQuality(dayCount);
+      const agentsToGenerate = agentsSize - agents.length - 1;
+      let generatedAgents = [];
+      for (let i = 0; i < agentsToGenerate; i++) {
+        generatedAgents.push(generateAgent(newgenAgentQuality));
       }
-      setAgents(agents.concat(generatedAgents))
+      setAgents(agents.concat(generatedAgents));
     }
 
     setFailedTasks([]);
     setCorrectTasks([]);
-
   };
 
-  const generateTaskDifficulty = (dayCount) =>{
-    let difficulty = Math.round(0.9 * dayCount)
-    if(difficulty > 20){
+  const generateTaskDifficulty = (dayCount) => {
+    let difficulty = Math.round(0.9 * dayCount);
+    if (difficulty > 20) {
       difficulty = 20;
     }
-    return difficulty
-  }
+    return difficulty;
+  };
 
   const generateAgentQuality = (dayCount) => {
-    let quality = Math.round(0.7 * dayCount)
-    if(quality > 20){
-      quality = 20
+    let quality = Math.round(0.7 * dayCount);
+    if (quality > 20) {
+      quality = 20;
     }
-    return quality
-  }
+    return quality;
+  };
 
   const addNewAgent = () => {
     setAgents((prevAgents) => [
@@ -83,44 +100,55 @@ export default function App() {
     ]);
   };
 
-  return tasks.length === 0 ? (
-    <EndDay
-      finishedTasks={finishedTasks}
-      money={money}
-      setMoney={setMoney}
-      addNewAgent={addNewAgent}
-      generateNextRound={generateNextRound}
-      failedTasks={failedTasks}
-      setFailedTasks={setFailedTasks}
-      correctTasks={correctTasks}
-      setCorrectTasks={setCorrectTasks}
-    ></EndDay>
-  ) : (
+  return (
     <div
-      className="flex h-full w-full bg-gray-100 bg-repeat"
+      className="flex w-screen h-screen overflow-auto bg-gray-100 bg-cover"
       style={{ backgroundImage: `url(${desk})` }}
     >
-      <div className="h-full w-1/3">
-        <Sidebar
-          agents={agents}
-          setSelectedAgent={setSelectedAgentIndex}
-          selectedAgent={selectedAgentIndex}
-        />
-      </div>
-      <div className="h-full w-full">
-        <TaskView
-          tasks={tasks}
-          agents={agents}
+      {tasks.length === 0 ? (
+        <EndDay
+          finishedTasks={finishedTasks}
           money={money}
           setMoney={setMoney}
-          finishedTasks={finishedTasks}
-          setFinishedTasks={setFinishedTasks}
-          setAgents={setAgents}
-          setTasks={setTasks}
-          selectedAgentIndex={selectedAgentIndex}
-          setSelectedAgentIndex={setSelectedAgentIndex}
+          addNewAgent={addNewAgent}
+          generateNextRound={generateNextRound}
+          failedTasks={failedTasks}
+          setFailedTasks={setFailedTasks}
+          correctTasks={correctTasks}
+          setCorrectTasks={setCorrectTasks}
+          showEndGame={showEndGame}
+        ></EndDay>
+      ) : showEndGame ? (
+        <EndGame
+          dayCount={dayCount}
+          setShowEndGame={setShowEndGame}
+          init={init}
         />
-      </div>
+      ) : (
+        <>
+          <div className="w-1/3 h-full">
+            <Sidebar
+              agents={agents}
+              setSelectedAgent={setSelectedAgentIndex}
+              selectedAgent={selectedAgentIndex}
+            />
+          </div>
+          <div className="w-full h-full">
+            <TaskView
+              tasks={tasks}
+              agents={agents}
+              money={money}
+              setMoney={setMoney}
+              finishedTasks={finishedTasks}
+              setFinishedTasks={setFinishedTasks}
+              setAgents={setAgents}
+              setTasks={setTasks}
+              selectedAgentIndex={selectedAgentIndex}
+              setSelectedAgentIndex={setSelectedAgentIndex}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

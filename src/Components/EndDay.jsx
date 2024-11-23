@@ -9,7 +9,8 @@ export default function EndDay({
     failedTasks,
     setFailedTasks,
     correctTasks,
-    setCorrectTasks
+    setCorrectTasks,
+    showEndGame
 }) {
 
 
@@ -21,13 +22,12 @@ export default function EndDay({
         setMoney(money + result.sum);
         setProfit(result.sum);
 
-
         setFailedTasks(result.failedTasks);
         setCorrectTasks(result.correctTasks);
     }, [finishedTasks]);
 
     return (
-        <div className="max-w-4xl p-6 mx-auto bg-gray-100 rounded-lg shadow-lg">
+        <div className="w-3/5 p-6 mx-auto my-10 bg-gray-200 shadow-lg h-fit">
             <div className="p-4 mb-6 text-gray-800 bg-gray-200 border-l-4 border-gray-500 rounded-lg">
                 <h3 className="text-xl font-semibold">You earned:</h3>
                 <p className="text-lg">
@@ -37,13 +37,13 @@ export default function EndDay({
                     Your total money is: <strong>{money}</strong>
                 </p>
             </div>
-            <div class="flex">
+            <div className="flex">
                 <div className="flex flex-col space-y-8">
                     {console.log(correctTasks)}
                     {correctTasks && correctTasks.map(([task, agent, score], i) => {
                         return (
-                            <div className='bg-green-200 m-4 p-6'>
-                                Score:{score}
+                            <div key={i} className='p-6 m-4 bg-green-200'>
+                                Score: {(score * 100).toString().slice(0, 4)}%
                                 <div key={i} className="flex justify-between space-x-8">
                                     <div className="flex-1 p-4 rounded-lg shadow-sm">
                                         <h4 className="text-lg font-semibold">Task Details</h4>
@@ -73,8 +73,8 @@ export default function EndDay({
                 <div className="flex flex-col space-y-8">
                     {failedTasks && failedTasks.map(([task, agent, score], i) => {
                         return (
-                            <div className='bg-red-200 m-4 p-6'>
-                                Score:{score}
+                            <div key={i} className='p-6 m-4 bg-red-200'>
+                                Score: {(score * 100).toString().slice(0, 4)}%
                                 <div key={i} className="flex justify-between space-x-8">
                                     <div className="flex-1 p-4 rounded-lg shadow-sm">
                                         <h4 className="text-lg font-semibold">Task Details</h4>
@@ -108,7 +108,7 @@ export default function EndDay({
                     onClick={generateNextRound}
                     className="px-6 py-2 text-white transition duration-300 bg-gray-600 rounded-md shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-300"
                 >
-                    Generate Next Round
+                    {showEndGame ? "End Game" : "Generate Next Round"}
                 </button>
             </div>
         </div>
