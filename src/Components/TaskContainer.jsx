@@ -10,16 +10,7 @@ export default function TaskContainer({ tasks }) {
             key={index}
             className="p-2 mb-4 border-2 border-gray-300 rounded-lg"
           >
-            <p className="text-sm text-gray-600">Requirements:</p>
-            <ul className="list-disc list-inside">
-              {task.requirements.map((req, index) => {
-                return (
-                  <li key={index} className="text-sm text-gray-600">
-                    {req[0]}: {req[1]}
-                  </li>
-                );
-              })}
-            </ul>
+            <p className="text-sm text-gray-600">TASK</p>
           </div>
         );
       })}

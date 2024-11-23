@@ -1,3 +1,5 @@
+import globalVars from "./globalVariables";
+
 function getCompability(agent, task) {
     let sum = 0;
     let diff = 0;

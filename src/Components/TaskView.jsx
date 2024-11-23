@@ -2,89 +2,36 @@
 import Buttons from './Buttons.jsx';
 import CurrentTask from './CurrentTask.jsx';
 import TaskContainer from './TaskContainer.jsx';
-import Task from '../logic/task.js';
 import { useState } from 'react';
 
-export default function TaskView() {
+export default function TaskView({ tasks }) {
+  const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
   
-  // eslint-disable-next-line no-unused-vars
-  const [currentTask, setCurrentTask] = useState(
-    new Task(
-      'task001',
-      [
-        ['age', 20],
-        ['year', 1500],
-      ],
-      'task1 description',
-      10,
-    ),
-  );
+  const submitTask = () => {
+    // todo
+    setCurrentTaskIndex((prev) => (prev + 1) % tasks.length);
+  }
 
-  const tasks = [
-    new Task(
-      'task001',
-      [
-        ['age', 20],
-        ['year', 1500],
-      ],
-      'task1 description',
-      10,
-    ),
-    new Task(
-      'task001',
-      [
-        ['age', 22],
-        ['year', 1500],
-      ],
-      'task1 description',
-      20,
-    ),
-    new Task(
-      'task001',
-      [
-        ['age', 23],
-        ['year', 1600],
-      ],
-      'task1 description',
-      1,
-    ),
-    new Task(
-      'task001',
-      [
-        ['age', 24],
-        ['year', 1700],
-      ],
-      'task1 description',
-      5,
-    ),
-    new Task(
-      'task001',
-      [
-        ['age', 25],
-        ['year', 1800],
-      ],
-      'task1 description',
-      10,
-    ),
-    new Task(
-      'task001',
-      [
-        ['age', 26],
-        ['year', 1900],
-      ],
-      'task1 description',
-      20,
-    ),
-  ];
+  const rejectTask = () => {
+    // todo
+    setCurrentTaskIndex((prev) => (prev + 1) % tasks.length);
+  }
+
+  const nextTask = () => {
+    setCurrentTaskIndex((prev) => (prev + 1) % tasks.length);
+  }
+
+  const currentTask = tasks[currentTaskIndex];
+
   return (
-    <div className="grid h-full w-full grid-cols-3 grid-rows-3">
-      <div className="col-start-3 row-start-1 flex items-center justify-center border bg-blue-100">
+    <div className="grid w-full h-full grid-cols-3 grid-rows-3">
+      <div className="flex items-center justify-center col-start-3 row-start-1 bg-blue-100 border">
         <TaskContainer tasks={tasks} />
       </div>
-      <div className="col-start-3 row-start-3 flex items-center justify-center rounded-lg border bg-gray-100">
-        <Buttons />
+      <div className="flex items-center justify-center col-start-3 row-start-3 bg-gray-100 border rounded-lg">
+        <Buttons submitTask={submitTask} nextTask={nextTask} rejectTask={rejectTask}/>
       </div>
-      <div className="col-span-2 row-span-3 row-start-1 flex items-center justify-center">
+      <div className="flex items-center justify-center col-span-2 row-span-3 row-start-1">
         <CurrentTask currentTask={currentTask} />
       </div>
     </div>

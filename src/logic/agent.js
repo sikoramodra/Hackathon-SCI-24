@@ -1,5 +1,3 @@
-import generateAgent from "./agentGenerator";
-
 class Agent{
     constructor(sex, age, fullName, quality, spec, effectiveRangeStart, effectiveRangeEnd){
         this.sex = sex;
