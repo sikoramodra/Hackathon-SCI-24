@@ -26,6 +26,10 @@ export default function App() {
     setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
   }
 
+  const addNewAgent = () => {
+    
+  }
+
   return (
     tasks.length === 0 ? <EndDay finishedTasks={finishedTasks} money={money} setMoney={setMoney} generateNextRound={generateNextRound}></EndDay> :
       <div className="flex w-full h-full bg-gray-100">

@@ -1,4 +1,5 @@
 import getCompability from "./getCompability";
+import globalVars from "./globalVariables";
 
 function checkDay(finished) {
     console.log("dash");
@@ -12,7 +13,7 @@ function checkDay(finished) {
         console.log(score)
 
         if(score < 0.5) {
-            sum -= pair[0].value;
+            sum -= globalVars.TASK_DECLINE_PENALTY;
             isChecked = true;
             console.log(score);
             console.log(pair);
@@ -25,7 +26,6 @@ function checkDay(finished) {
     if(isChecked) {
         a.unshift(sum);
         
-        //a.push(sum)
         return a;
     } else {
         return [sum];

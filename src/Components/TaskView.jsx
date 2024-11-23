@@ -7,11 +7,11 @@ import TaskContainer from './TaskContainer.jsx';
 
 export default function TaskView({ tasks, agents, finishedTasks, setFinishedTasks, setTasks, setAgents, selectedAgentIndex, setSelectedAgentIndex }) {
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0);  
-
+  const [agentsCopy, setAgentsCopy] = useState([]);
   const submitTask = () => {
     setFinishedTasks((prev) => [...prev, [tasks[currentTaskIndex], agents[selectedAgentIndex]]]);
     setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
-    setAgents((prev) => prev.filter((_, index) => index !== selectedAgentIndex));
+    setAgentsCopy((prev) => prev.filter((_, index) => index !== selectedAgentIndex));
     setSelectedAgentIndex(null);
     setCurrentTaskIndex((prev) => (prev + 1) % tasks.length);
   }
@@ -19,6 +19,10 @@ export default function TaskView({ tasks, agents, finishedTasks, setFinishedTask
   useEffect(() => {
     console.log(finishedTasks);
   }, [finishedTasks]);
+
+  useEffect(() => {
+    setAgentsCopy(agents.slice());
+  }, [agents]);
 
   const rejectTask = () => {
     setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
