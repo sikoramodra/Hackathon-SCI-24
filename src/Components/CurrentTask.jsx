@@ -8,7 +8,6 @@ export default function CurrentTask({
 }) {
   return (
     <>
-<<<<<<< HEAD
       <img
         className="absolute z-0 w-1/2 select-none"
         src={folderImage}
@@ -45,12 +44,6 @@ export default function CurrentTask({
       </div>
       <div className="relative z-10 mr-auto h-3/5 w-2/5 p-6">
         <h2 className="mb-4 text-center text-xl font-semibold text-gray-700">
-=======
-      <img className="absolute z-0 w-1/2" src={folderImage} alt="" />
-      <div className="z-10 w-1/3 "></div>
-      <div className="z-10 w-2/5 p-6 mx-auto h-3/5">
-        <h2 className="mb-4 text-xl font-semibold text-center text-gray-700 shadows-into-light-regular">
->>>>>>> 2d0f346 (drobne kosmetyki)
           {currentTask.description}
         </h2>
         <div className="space-y-2">

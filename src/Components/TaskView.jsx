@@ -13,6 +13,7 @@ export default function TaskView({
   setSelectedAgentIndex,
 }) {
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
+  const [agentsCopy, setAgentsCopy] = useState(0)
   const submitTask = () => {
     setFinishedTasks((prev) => [
       ...prev,

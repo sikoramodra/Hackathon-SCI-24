@@ -24,7 +24,6 @@ export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
                 {val.age}
               </p>
               <p className="mb-2 text-sm text-gray-600">
-<<<<<<< HEAD
                 <span className="font-semibold">Spec: </span>
                 {val.spec}
               </p>
@@ -35,18 +34,6 @@ export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
               <p className="mb-2 text-sm text-gray-600">
                 <span className="font-semibold">Effective range: </span>
                 {val.effectiveRangeStart}-{val.effectiveRangeEnd}
-=======
-                <span className="font-semibold">Sex: </span>
-                {val.sex.charAt(0).toUpperCase() + val.sex.slice(1)}
-              </p>
-              <p className="mb-2 text-sm text-gray-600">
-                <span className="font-semibold">Specialization: </span>
-                {val.spec.charAt(0).toUpperCase() + val.spec.slice(1)}
-              </p>
-              <p className="mb-2 text-sm text-gray-600">
-                <span className="font-semibold">Most effective in years: </span>
-                {val.effectiveRangeStart} - {val.effectiveRangeEnd}
->>>>>>> 2d0f346 (drobne kosmetyki)
               </p>
             </div>
           </div>
