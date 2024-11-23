@@ -20,7 +20,8 @@ export default function TaskView({
     ]);
     setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
     setAgents((prev) => prev.filter((_, index) => index !== selectedAgentIndex));
-    
+    const updatedTasks = tasks.filter((_, index) => index !== currentTaskIndex);
+
     setSelectedAgentIndex(null);
   
     if (updatedTasks.length === 0) {
