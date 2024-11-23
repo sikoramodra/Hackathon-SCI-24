@@ -12,6 +12,7 @@ export default function TaskView({
   setFinishedTasks,
   setAgents,
   setTasks,
+  dayCount,
   selectedAgentIndex,
   setSelectedAgentIndex,
 }) {
@@ -67,7 +68,7 @@ export default function TaskView({
   };
 
   const addNewAgent = () => {
-    setMoney(money - 20);
+    setMoney(money - 50);
     setAgents((prevAgents) => [...prevAgents, agentGenerator(1)]);
   };
 
@@ -88,6 +89,7 @@ export default function TaskView({
           money={money}
           addNewAgent={addNewAgent}
           submitTask={submitTask}
+          dayCount={dayCount}
           nextTask={nextTask}
           rejectTask={rejectTask}
           isAgentSelected={isAgentSelected}

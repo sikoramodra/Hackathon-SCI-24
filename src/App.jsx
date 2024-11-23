@@ -25,56 +25,62 @@ export default function App() {
     setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
   };
 
-  const generateNextRound = () => {  
+  const generateNextRound = () => {
     setDayCount(dayCount + 1);
-  
+
     finishedTasks.forEach((element) => {
       let survived = true;
       if (element[1] && element[1].fullName !== null) {
-        {failedTasks && failedTasks.map(([task, agent, score], i) => {
-          console.log(agent.fullName)
-          if(agent.fullName === element[1].fullName) {
-            survived = false;
-          }
-        })}
+        {
+          failedTasks &&
+            failedTasks.map(([task, agent, score], i) => {
+              console.log(agent.fullName);
+              if (agent.fullName === element[1].fullName) {
+                survived = false;
+              }
+            });
+        }
         if (survived) {
           setAgents((prevAgents) => [...prevAgents, element[1]]);
         }
       }
     });
-    setAgentsSize(agents.length)
+    setAgentsSize(agents.length);
     setFinishedTasks([]);
-    setTasks(Array.from({ length: agentsSize }, () => generateTask(generateTaskDifficulty(dayCount))));
-    if(agents.length - 1 < agentsSize){
-      const newgenAgentQuality = generateAgentQuality(dayCount)
-      const agentsToGenerate = agentsSize - agents.length - 1
-      let generatedAgents = []
-      for(let i = 0; i < agentsToGenerate; i++){
-        generatedAgents.push(generateAgent(newgenAgentQuality))
+    setTasks(
+      Array.from({ length: agentsSize }, () =>
+        generateTask(generateTaskDifficulty(dayCount)),
+      ),
+    );
+    if (agents.length - 1 < agentsSize) {
+      const newgenAgentQuality = generateAgentQuality(dayCount);
+      const agentsToGenerate = agentsSize - agents.length - 1;
+      let generatedAgents = [];
+      for (let i = 0; i < agentsToGenerate; i++) {
+        generatedAgents.push(generateAgent(newgenAgentQuality));
       }
-      setAgents(agents.concat(generatedAgents))
+      setAgents(agents.concat(generatedAgents));
     }
 
     setFailedTasks([]);
     setCorrectTasks([]);
-
   };
 
-  const generateTaskDifficulty = (dayCount) =>{
-    let difficulty = Math.round(0.9 * dayCount)
-    if(difficulty > 20){
+  const generateTaskDifficulty = (dayCount) => {
+    let difficulty = Math.round(0.9 * dayCount);
+    if (difficulty > 20) {
       difficulty = 20;
     }
-    return difficulty
-  }
+    return difficulty;
+  };
 
   const generateAgentQuality = (dayCount) => {
-    let quality = Math.round(0.7 * dayCount)
-    if(quality > 20){
-      quality = 20
+    let quality = Math.round(0.7 * dayCount);
+    if (quality > 20) {
+      quality = 20;
     }
-    return quality
-  }
+    return quality;
+  };
 
   const addNewAgent = () => {
     setAgents((prevAgents) => [
@@ -117,6 +123,7 @@ export default function App() {
           setFinishedTasks={setFinishedTasks}
           setAgents={setAgents}
           setTasks={setTasks}
+          dayCount={dayCount}
           selectedAgentIndex={selectedAgentIndex}
           setSelectedAgentIndex={setSelectedAgentIndex}
         />

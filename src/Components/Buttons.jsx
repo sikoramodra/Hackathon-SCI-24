@@ -4,12 +4,19 @@ export default function Buttons({
   isAgentSelected,
   money,
   addNewAgent,
+  dayCount,
 }) {
   return (
     <div>
-      <h3 className="mb-2 text-center text-gray-200">
-        <span className="font-semibold">Balance: </span>
-        {money}
+      <h3 className="mb-2 flex justify-around text-center text-gray-200">
+        <div>
+          <span className="font-semibold">Day: </span>
+          {dayCount}
+        </div>
+        <div>
+          <span className="font-semibold">Balance: </span>
+          {money}
+        </div>
       </h3>
 
       <div className="flex flex-wrap items-center justify-center gap-4 p-5">
@@ -27,11 +34,11 @@ export default function Buttons({
           Reject order
         </button>
         <button
-          disabled={money < 20}
+          disabled={money < 50}
           onClick={addNewAgent}
-          className={`rounded-lg px-4 py-2 shadow-lg ${money >= 20 ? 'bg-blue-400 hover:bg-blue-500' : 'bg-gray-500 hover:bg-gray-500'}`}
+          className={`rounded-lg px-4 py-2 shadow-lg ${money >= 50 ? 'bg-blue-400 hover:bg-blue-500' : 'bg-gray-500 hover:bg-gray-500'}`}
         >
-          Hire new agent (20)
+          Hire new agent (50)
         </button>
       </div>
     </div>
