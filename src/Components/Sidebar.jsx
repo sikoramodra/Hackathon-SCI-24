@@ -6,6 +6,8 @@ import agent_0_man from '../assets/avatar_0_man_secret.png';
 import agent_1_man from '../assets/avatar_1_man_secret.png';
 import agent_2_man from '../assets/avatar_2_man_secret.png';
 import agent_3_man from '../assets/avatar_3_man_secret.png';
+import agentIcon from '../assets/agent.png';
+import eraCheck from '../logic/yearEraCheck';
 
 export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
   const timeRanges = [0, 1000, 2000, 3000];
@@ -51,7 +53,7 @@ export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
               </p>
               <p className="mb-2 text-sm text-gray-600">
                 <span className="font-semibold">Most effective in years: </span>
-                {val.effectiveRangeStart} - {val.effectiveRangeEnd}
+                {eraCheck(val.effectiveRangeStart)} - {eraCheck(val.effectiveRangeEnd)}
               </p>
             </div>
           </div>

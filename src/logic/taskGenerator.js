@@ -1,4 +1,5 @@
 import globalVars from './globalVariables';
+import eraCheck from './yearEraCheck';
 import Task from './task';
 import { fakerEN, fakerDE, fakerYO_NG, fakerIT } from '@faker-js/faker';
 const specs = globalVars['SPECIALTIES'];
@@ -49,12 +50,12 @@ function __generateTaskClues(requirements) {
     ) {
       case 'year':
         const yearClues = [
-          'This mission takes place in ' + value + '. ',
+          'This mission takes place in ' + eraCheck(value) + '. ',
           'Someone who has an expertise working around the year ' +
-            value +
+            eraCheck(value) +
             ' would be needed for this mission.',
           'An agent with experience working around the year ' +
-            value +
+            eraCheck(value) +
             ' would be preferred.',
         ];
         taskClues +=

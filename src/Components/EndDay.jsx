@@ -6,17 +6,24 @@ export default function EndDay({
     money,
     setMoney,
     generateNextRound,
+    failedTasks,
+    setFailedTasks,
+    correctTasks,
+    setCorrectTasks
 }) {
-    const [failedTasks, setFailedTasks] = useState(null);
+
+
     const [profit, setProfit] = useState(0);
 
     useEffect(() => {
         const result = checkDay(finishedTasks);
-        console.log('Result:',  result);
+        console.log('Result:', result);
         setMoney(money + result.sum);
         setProfit(result.sum);
 
+
         setFailedTasks(result.failedTasks);
+        setCorrectTasks(result.correctTasks);
     }, [finishedTasks]);
 
     return (
@@ -30,38 +37,72 @@ export default function EndDay({
                     Your total money is: <strong>{money}</strong>
                 </p>
             </div>
+            <div class="flex">
                 <div className="flex flex-col space-y-8">
-                    {/* Loop from 1 to a.length, incrementing by 2 */}
-                    {failedTasks && failedTasks.map(([task, agent], i) => {
+                    {console.log(correctTasks)}
+                    {correctTasks && correctTasks.map(([task, agent, score], i) => {
                         return (
-                            <div key={i} className="flex justify-between space-x-8">
-                                {/* Task Details (Left) */}
-                                <div className="flex-1 p-4 rounded-lg shadow-sm">
-                                    <h4 className="text-lg font-semibold">Task Details</h4>
-                                    {task.requirements.map((element, index) => (
-                                        <div key={index} className="mt-4">
-                                            <p><strong>Requirement:</strong> {element[0]}</p>
-                                            <p><strong>Description:</strong> {element[1]}</p>
+                            <div className='bg-green-200 m-4 p-6'>
+                                Score:{score}
+                                <div key={i} className="flex justify-between space-x-8">
+                                    <div className="flex-1 p-4 rounded-lg shadow-sm">
+                                        <h4 className="text-lg font-semibold">Task Details</h4>
+                                        {task.requirements.map((element, index) => (
+                                            <div key={index} className="mt-4">
+                                                <p><strong>Requirement:</strong> {element[0]}</p>
+                                                <p><strong>Description:</strong> {element[1]}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="flex-1 p-4 rounded-lg shadow-sm">
+                                        <h4 className="text-lg font-semibold">Agent Details</h4>
+                                        <div className="mt-4">
+                                            {agent.sex && <p><strong>Sex:</strong> {agent.sex}</p>}
+                                            {agent.age && <p><strong>Age:</strong> {agent.age}</p>}
+                                            {agent.spec && <p><strong>Specialization:</strong> {agent.spec}</p>}
+                                            {(agent.effectiveRangeStart && agent.effectiveRangeEnd) &&
+                                                <p><strong>Effective Range:</strong> {agent.effectiveRangeStart} to {agent.effectiveRangeEnd}</p>
+                                            }
                                         </div>
-                                    ))}
-                                </div>
-
-                                {/* Agent Details (Right) */}
-                                <div className="flex-1 p-4 bg-gray-200 rounded-lg shadow-sm">
-                                    <h4 className="text-lg font-semibold">Agent Details</h4>
-                                    <div className="mt-4">
-                                        {agent.sex && <p><strong>Sex:</strong> {agent.sex}</p>}
-                                        {agent.age && <p><strong>Age:</strong> {agent.age}</p>}
-                                        {agent.spec && <p><strong>Specialization:</strong> {agent.spec}</p>}
-                                        {(agent.effectiveRangeStart && agent.effectiveRangeEnd) &&
-                                            <p><strong>Effective Range:</strong> {agent.effectiveRangeStart} to {agent.effectiveRangeEnd}</p>
-                                        }
                                     </div>
                                 </div>
                             </div>
                         );
                     })}
                 </div>
+                <div className="flex flex-col space-y-8">
+                    {failedTasks && failedTasks.map(([task, agent, score], i) => {
+                        return (
+                            <div className='bg-red-200 m-4 p-6'>
+                                Score:{score}
+                                <div key={i} className="flex justify-between space-x-8">
+                                    <div className="flex-1 p-4 rounded-lg shadow-sm">
+                                        <h4 className="text-lg font-semibold">Task Details</h4>
+                                        {task.requirements.map((element, index) => (
+                                            <div key={index} className="mt-4">
+                                                <p><strong>Requirement:</strong> {element[0]}</p>
+                                                <p><strong>Description:</strong> {element[1]}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="flex-1 p-4 rounded-lg shadow-sm">
+                                        <h4 className="text-lg font-semibold">Agent Details</h4>
+                                        <div className="mt-4">
+                                            {agent.sex && <p><strong>Sex:</strong> {agent.sex}</p>}
+                                            {agent.age && <p><strong>Age:</strong> {agent.age}</p>}
+                                            {agent.spec && <p><strong>Specialization:</strong> {agent.spec}</p>}
+                                            {(agent.effectiveRangeStart && agent.effectiveRangeEnd) &&
+                                                <p><strong>Effective Range:</strong> {agent.effectiveRangeStart} to {agent.effectiveRangeEnd}</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+
             <div className="flex justify-center mt-6">
                 <button
                     onClick={generateNextRound}

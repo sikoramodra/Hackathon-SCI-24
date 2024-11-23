@@ -17,13 +17,7 @@ function getCompability(task, agent) {
         if (diff) {
           diff = Math.abs(diff);
           sum += 1 - diff / ((globalVars.TIME_END - globalVars.TIME_START));
-          console.log("year")
-          console.log("tpYear")
-          console.log(tpYear)
-          console.log("diff")
-          console.log(diff)
-          console.log(1 - diff / ((globalVars.TIME_END - globalVars.TIME_START)))
-        } else {
+          } else {
           sum += 1
         }
         break;
@@ -32,12 +26,6 @@ function getCompability(task, agent) {
         if (diff) {
           diff = Math.abs(diff);
           sum += 1 - diff / ((globalVars.MAX_AGE - globalVars.MIN_AGE));
-          console.log("age")
-          console.log(1 - diff / ((globalVars.MAX_AGE - globalVars.MIN_AGE)))
-          console.log("diff")
-          console.log(diff)
-          console.log("agent.age")
-          console.log(agent.age)
         } else {
           sum += 1
         }

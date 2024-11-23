@@ -2,9 +2,11 @@ import getCompability from './getCompability';
 import globalVars from './globalVariables';
 
 function checkDay(finished) {
-    let a = []
+    let wrong = []
+    let correct = []
     let isChecked = false;
     let sum = 0;
+    let item;
     finished.forEach(pair => {
         if(pair[1] == null) {
             sum-=globalVars.TASK_DECLINE_PENALTY;
@@ -15,9 +17,15 @@ function checkDay(finished) {
         if(score < 0.5) {
             sum -=pair[0].value; 
             isChecked = true;
-            a.push(pair);
+            item = pair.slice();
+            item.push(score)
+            wrong.push(item);
         } else {
+            isChecked = true;
             sum+=pair[0].value;
+            item = pair.slice();
+            item.push(score)
+            correct.push(item)
         }
     });
     
@@ -25,12 +33,14 @@ function checkDay(finished) {
     if(isChecked) {
         return {
             sum: sum,
-            failedTasks: a
+            failedTasks: wrong,
+            correctTasks: correct
         };
     } else {
         return {
             sum: sum,
-            failedTasks: null
+            failedTasks: null,
+            correctTasks: null
         };
     }
 }

@@ -27,16 +27,13 @@ function __generateSex() {
 }
 
 function __generateEffectiveRange(quality) {
-  const minRangeLength = quality * 5 * 5/4;
-  const maxRangeLength = minRangeLength + quality * 10 * 5/4;
+  const minRangeLength = quality * 5;
+  const maxRangeLength = minRangeLength + quality * 10;
   const rangeLength = __getRandomIntInclusive(minRangeLength, maxRangeLength);
 
-  let rangeStart =
-    globalVars['TIME_END'] -
-    __getRandomIntInclusive(globalVars['TIME_START'], globalVars['TIME_END']);
-  if (rangeStart < globalVars['TIME_START']) {
-    rangeStart = globalVars['TIME_START'];
-  }
+  const maxStart = globalVars['TIME_END'] - minRangeLength;
+  const minStart = globalVars['TIME_START'];
+  let rangeStart = __getRandomIntInclusive(minStart, maxStart);
 
   let rangeEnd = rangeStart + rangeLength;
   if (rangeEnd > globalVars['TIME_END']) {

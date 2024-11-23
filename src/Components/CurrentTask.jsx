@@ -1,4 +1,5 @@
 import folderImage from '../assets/folder.png';
+import eraCheck from '../logic/yearEraCheck';
 
 export default function CurrentTask({
   currentTask,
@@ -39,8 +40,8 @@ export default function CurrentTask({
             </p>
             <p className="mb-2 text-sm text-gray-600">
               <span className="font-semibold">Effective range: </span>
-              {agents[selectedAgentIndex]?.effectiveRangeStart}-
-              {agents[selectedAgentIndex]?.effectiveRangeEnd}
+              {eraCheck(agents[selectedAgentIndex]?.effectiveRangeStart)}-
+              {eraCheck(agents[selectedAgentIndex]?.effectiveRangeEnd)}
             </p>
           </div>
         )}

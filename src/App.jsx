@@ -14,7 +14,8 @@ export default function App() {
   const [tasks, setTasks] = useState([]);
   const [selectedAgentIndex, setSelectedAgentIndex] = useState(null);
   const [finishedTasks, setFinishedTasks] = useState([]);
-
+  const [failedTasks, setFailedTasks] = useState(null);
+  const [correctTasks, setCorrectTasks] = useState(null);
   useEffect(() => {
     init();
   }, []);
@@ -23,14 +24,25 @@ export default function App() {
     setAgents(Array.from({ length: agentsSize }, () => generateAgent(1)));
     setTasks(Array.from({ length: agentsSize }, () => generateTask(1)));
   };
-  const generateNextRound = () => {
+
+  const generateNextRound = () => {  
     setDayCount(dayCount + 1);
+  
     finishedTasks.forEach((element) => {
-      console.log(element)
-      if (element[1] !== null) {
-        setAgents((prevAgents) => [...prevAgents, element[1]]);
+      let survived = true;
+      if (element[1] && element[1].fullName !== null) {
+        {failedTasks && failedTasks.map(([task, agent, score], i) => {
+          console.log(agent.fullName)
+          if(agent.fullName === element[1].fullName) {
+            survived = false;
+          }
+        })}
+        if (survived) {
+          setAgents((prevAgents) => [...prevAgents, element[1]]);
+        }
       }
     });
+    setAgentsSize(agents.length)
     setFinishedTasks([]);
     setTasks(Array.from({ length: agentsSize }, () => generateTask(generateTaskDifficulty(dayCount))));
     if(agents.length - 1 < agentsSize){
@@ -42,6 +54,10 @@ export default function App() {
       }
       setAgents(agents.concat(generatedAgents))
     }
+
+    setFailedTasks([]);
+    setCorrectTasks([]);
+
   };
 
   const generateTaskDifficulty = (dayCount) =>{
@@ -74,6 +90,10 @@ export default function App() {
       setMoney={setMoney}
       addNewAgent={addNewAgent}
       generateNextRound={generateNextRound}
+      failedTasks={failedTasks}
+      setFailedTasks={setFailedTasks}
+      correctTasks={correctTasks}
+      setCorrectTasks={setCorrectTasks}
     ></EndDay>
   ) : (
     <div
