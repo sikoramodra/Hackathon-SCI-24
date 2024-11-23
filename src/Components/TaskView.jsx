@@ -22,7 +22,6 @@ export default function TaskView({ tasks, agents,  setTasks, setAgents, selected
   }, [finishedTasks]);
 
   const rejectTask = () => {
-    // todo
     setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
     setCurrentTaskIndex((prev) => (prev + 1) % tasks.length);
   }
