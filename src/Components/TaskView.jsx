@@ -13,13 +13,14 @@ export default function TaskView({
   setSelectedAgentIndex,
 }) {
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
-  const [agentsCopy, setAgentsCopy] = useState(0)
+  const [agentsCopy, setAgentsCopy] = useState([]);
   const submitTask = () => {
     setFinishedTasks((prev) => [
       ...prev,
       [tasks[currentTaskIndex], agents[selectedAgentIndex]],
     ]);
     setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
+    setAgentsCopy((prev) => prev.filter((_, index) => index !== selectedAgentIndex));
     setSelectedAgentIndex(null);
     setCurrentTaskIndex((prev) => (prev + 1) % tasks.length);
   }
@@ -48,11 +49,11 @@ export default function TaskView({
   console.log('TaskView rendered');
 
   return (
-    <div className="grid h-full w-full grid-cols-3 grid-rows-3">
-      <div className="col-start-3 row-span-2 row-start-1 flex items-start pt-8">
+    <div className="grid w-full h-full grid-cols-3 grid-rows-3">
+      <div className="flex items-start col-start-3 row-span-2 row-start-1 pt-8">
         <TaskContainer tasks={tasks} currentTaskIndex={currentTaskIndex} />
       </div>
-      <div className="col-start-3 row-start-3 flex items-center justify-center rounded-lg border bg-gray-100">
+      <div className="flex items-center justify-center col-start-3 row-start-3 bg-gray-100 border rounded-lg">
         <Buttons
           submitTask={submitTask}
           nextTask={nextTask}
@@ -60,7 +61,7 @@ export default function TaskView({
           isAgentSelected={isAgentSelected}
         />
       </div>
-      <div className="col-span-2 row-span-3 row-start-1 flex items-center justify-center">
+      <div className="flex items-center justify-center col-span-2 row-span-3 row-start-1">
         <CurrentTask
           currentTask={currentTask}
           selectedAgentIndex={selectedAgentIndex}

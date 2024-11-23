@@ -2,9 +2,7 @@ import folderImage from '../assets/folder.png';
 // import paper from '../assets/paper.jpg';
 
 export default function CurrentTask({
-  currentTask,
-  agents,
-  selectedAgentIndex,
+  currentTask
 }) {
   return (
     <>
@@ -48,7 +46,7 @@ export default function CurrentTask({
         </h2>
         <div className="space-y-2">
           <h3 className="text-sm text-gray-600">Requirements:</h3>
-          <ul className="list-inside list-disc">
+          <ul className="list-disc list-inside">
             {currentTask.requirements.map((req, index) => {
               return (
                 <li key={index} className="text-sm text-gray-600">
