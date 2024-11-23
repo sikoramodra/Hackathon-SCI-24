@@ -33,13 +33,12 @@ export default function TaskView({ tasks, agents,  setTasks, setAgents, selected
   const currentTask = tasks[currentTaskIndex];
   const isAgentSelected = selectedAgentIndex !== null;
 
-  console.log(tasks);
-  console.log(currentTask);
+  console.log('TaskView rendered');
 
   return (
     <div className="grid w-full h-full grid-cols-3 grid-rows-3">
       <div className="flex items-start col-start-3 row-span-2 row-start-1 pt-8">
-        <TaskContainer tasks={tasks.filter((_, index) => index !== currentTaskIndex)} />
+        <TaskContainer tasks={tasks} currentTaskIndex={currentTaskIndex} />
       </div>
       <div className="flex items-center justify-center col-start-3 row-start-3 bg-gray-100 border rounded-lg">
         <Buttons submitTask={submitTask} nextTask={nextTask} rejectTask={rejectTask} isAgentSelected={isAgentSelected}/>
