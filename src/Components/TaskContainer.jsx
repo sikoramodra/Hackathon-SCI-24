@@ -1,16 +1,24 @@
 export default function TaskContainer({ tasks }) {
+
+  const calculatePosition = (index) => {
+    if (tasks.length < 5) {
+      return index * 10 + 20;
+    }
+    if (index >= tasks.length - 5) {
+      return (index - (tasks.length - 5)) * 10 + 20;
+    } else {
+      return 20;
+    }
+  }
   return (
-    <div className="w-5/6 p-4 mx-auto border-2 border-gray-300 rounded-lg shadow-lg h-1/2">
-      <h2 className="mb-4 text-xl font-semibold text-center text-gray-700">
-        Tasks
-      </h2>
+    <div className="w-5/6 p-4 mx-auto h-3/5 rounded-xl bg-[#eed6b4] relative ">
       {tasks.map((task, index) => {
         return (
           <div
             key={index}
-            className="p-2 mb-4 border-2 border-gray-300 rounded-lg"
+            className="absolute bg-[#f2f7ff] rounded-lg w-60 h-72 border-2 border-black" style={{ right: `${calculatePosition(index)}px`, top: `${calculatePosition(index)}px` }} 
           >
-            <p className="text-sm text-gray-600">TASK</p>
+            Req
           </div>
         );
       })}
