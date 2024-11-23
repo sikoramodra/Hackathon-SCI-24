@@ -45,13 +45,15 @@ export default function CurrentTask({
           </div>
         )}
       </div>
-      <div className="relative z-10 mr-auto h-3/5 w-2/5 p-6">
-        <h2 className="mb-4 text-center text-xl font-semibold text-gray-700">
+      <div className="relative z-10 -mt-4 mr-auto h-3/5 w-2/5 p-6">
+        <h2 className="mb-4 overflow-hidden text-center text-xl font-semibold text-gray-700">
           {currentTask.description}
         </h2>
         <div className="space-y-2">
           <p className="text-sm text-gray-600">{currentTask.clues}</p>
-          <p className="text-sm text-gray-600">Contract value: <b>{currentTask.value}</b> money.</p>
+          <p className="text-sm text-gray-600">
+            Contract value: <b>{currentTask.value}</b> money.
+          </p>
         </div>
       </div>
     </>
