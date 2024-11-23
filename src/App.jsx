@@ -6,37 +6,32 @@ import generateAgent from './logic/agentGenerator.js';
 import generateTask from './logic/taskGenerator.js';
 
 export default function App() {
-  // eslint-disable-next-line no-unused-vars
-  const [agents, setAgents] = useState(
-    Array.from({ length: 5 }, () => generateAgent(1)),
-  );
-  // eslint-disable-next-line no-unused-vars
-  const [tasks, setTasks] = useState(
-    Array.from({ length: 5 }, () => generateTask(1)),
-  );
+   
+  const [agents, setAgents] = useState([]);
+  const [tasks, setTasks] = useState([]);
+  const [selectedAgentIndex, setSelectedAgentIndex] = useState(null);
 
-  const [selectedAgent, setSelectedAgent] = useState(null);
   useEffect(() => {
-    console.log(agents[selectedAgent]);
-  }, [selectedAgent]);
+    init();
+  }, []);
 
-    Array.from({ length: 3 }, () => generateTask(1)),
-  )
-
-  // eslint-disable-next-line no-unused-vars
-  const [finishedTasks, setFinishedTasks] = useState([]);
+  const init = () => {
+    setAgents(Array.from({ length: 5 }, () => generateAgent(1)));
+    setTasks(Array.from({ length: 3 }, () => generateTask(1)));
+  };
   
   return (
+    tasks.length === 0 ? <div>You did every task</div> :
     <div className="flex w-full h-full bg-gray-100">
       <div className="w-1/3 h-full">
         <Sidebar
           agents={agents}
-          setSelectedAgent={setSelectedAgent}
-          selectedAgent={selectedAgent}
+          setSelectedAgent={setSelectedAgentIndex}
+          selectedAgent={selectedAgentIndex}
         />
       </div>
       <div className="w-full h-full">
-        <TaskView tasks={tasks} />
+        <TaskView tasks={tasks} agents={agents} setAgents={setAgents} setTasks={setTasks} selectedAgentIndex={selectedAgentIndex} setSelectedAgentIndex={setSelectedAgentIndex} />
       </div>
     </div>
   );
