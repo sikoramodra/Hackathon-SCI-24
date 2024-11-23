@@ -60,6 +60,8 @@ export default function App() {
         <TaskView
           tasks={tasks}
           agents={agents}
+          money={money}
+          setMoney={setMoney}
           finishedTasks={finishedTasks}
           setFinishedTasks={setFinishedTasks}
           setAgents={setAgents}

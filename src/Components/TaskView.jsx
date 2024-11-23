@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 import Buttons from './Buttons.jsx';
 import CurrentTask from './CurrentTask.jsx';
 import TaskContainer from './TaskContainer.jsx';
+import agentGenerator from '../logic/agentGenerator.js';
 
 export default function TaskView({
   tasks,
   agents,
+  money,
+  setMoney,
   setFinishedTasks,
   setAgents,
   setTasks,
@@ -19,16 +22,18 @@ export default function TaskView({
       [tasks[currentTaskIndex], agents[selectedAgentIndex]],
     ]);
     setTasks((prev) => prev.filter((_, index) => index !== currentTaskIndex));
-    setAgents((prev) => prev.filter((_, index) => index !== selectedAgentIndex));
+    setAgents((prev) =>
+      prev.filter((_, index) => index !== selectedAgentIndex),
+    );
     const updatedTasks = tasks.filter((_, index) => index !== currentTaskIndex);
 
     setSelectedAgentIndex(null);
-  
+
     if (updatedTasks.length === 0) {
       setCurrentTaskIndex(0); // Reset if no tasks remain
     } else {
       setCurrentTaskIndex((prev) =>
-        prev >= updatedTasks.length ? updatedTasks.length - 1 : prev
+        prev >= updatedTasks.length ? updatedTasks.length - 1 : prev,
       );
     }
   };
@@ -61,22 +66,33 @@ export default function TaskView({
     });
   };
 
+  const addNewAgent = () => {
+    setMoney(money - 20);
+    setAgents((prevAgents) => [...prevAgents, agentGenerator(1)]);
+  };
+
   const currentTask = tasks[currentTaskIndex];
   const isAgentSelected = selectedAgentIndex !== null;
 
   return (
-    <div className="grid w-full h-full grid-cols-3 grid-rows-3">
-      <div className="flex items-start col-start-3 row-span-2 row-start-1 pt-8">
-        <TaskContainer tasks={tasks} currentTaskIndex={currentTaskIndex} nextTask={nextTask}/>
+    <div className="grid h-full w-full grid-cols-3 grid-rows-3">
+      <div className="col-start-3 row-span-2 row-start-1 flex items-start pt-8">
+        <TaskContainer
+          tasks={tasks}
+          currentTaskIndex={currentTaskIndex}
+          nextTask={nextTask}
+        />
       </div>
       <div className="flex items-center justify-center rounded-lg">
         <Buttons
+          money={money}
+          addNewAgent={addNewAgent}
           submitTask={submitTask}
           rejectTask={rejectTask}
           isAgentSelected={isAgentSelected}
         />
       </div>
-      <div className="flex items-center justify-center col-span-2 row-span-3 row-start-1">
+      <div className="col-span-2 row-span-3 row-start-1 flex items-center justify-center">
         <CurrentTask
           currentTask={currentTask}
           selectedAgentIndex={selectedAgentIndex}
