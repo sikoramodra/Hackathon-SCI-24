@@ -9,6 +9,7 @@ const globalVars = {
         'killer',
         'engineer',
     ],
+    TASK_DECLINE_PENALTY: -10
 }
 
 export default globalVars
