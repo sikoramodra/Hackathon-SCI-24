@@ -27,8 +27,8 @@ function __generateSex() {
 }
 
 function __generateEffectiveRange(quality) {
-  const minRangeLength = quality * 5;
-  const maxRangeLength = minRangeLength + quality * 10;
+  const minRangeLength = quality * 5 * 5/4;
+  const maxRangeLength = minRangeLength + quality * 10 * 5/4;
   const rangeLength = __getRandomIntInclusive(minRangeLength, maxRangeLength);
 
   let rangeStart =
