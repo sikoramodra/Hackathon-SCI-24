@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import checkDay from '../logic/checkDay';
 
+function generatePercentString(num){
+    num = num * 100
+    num = Math.floor(num)
+    return new String(num) + '%'
+}
+
 export default function EndDay({
     finishedTasks,
     money,
@@ -43,7 +49,7 @@ export default function EndDay({
                     {correctTasks && correctTasks.map(([task, agent, score], i) => {
                         return (
                             <div className='bg-green-200 m-4 p-6'>
-                                Score:{score}
+                                Mission success chance: {generatePercentString(score)}
                                 <div key={i} className="flex justify-between space-x-8">
                                     <div className="flex-1 p-4 rounded-lg shadow-sm">
                                         <h4 className="text-lg font-semibold">Task Details</h4>
@@ -74,7 +80,7 @@ export default function EndDay({
                     {failedTasks && failedTasks.map(([task, agent, score], i) => {
                         return (
                             <div className='bg-red-200 m-4 p-6'>
-                                Score:{score}
+                                Mission success chance: {generatePercentString(score)}
                                 <div key={i} className="flex justify-between space-x-8">
                                     <div className="flex-1 p-4 rounded-lg shadow-sm">
                                         <h4 className="text-lg font-semibold">Task Details</h4>
