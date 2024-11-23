@@ -3,7 +3,7 @@ import agentIcon from '../assets/agent.png';
 export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
   return (
     <div className="no-scrollbar h-full w-full overflow-y-auto">
-      <div className="flex h-fit w-32 flex-col items-center gap-4 bg-gray-200 px-4 pb-40 pt-4">
+      <div className="flex h-fit min-h-full w-32 flex-col items-center gap-4 bg-gray-200 px-4 pb-40 pt-4">
         {agents.map((val, key) => (
           <div key={key} className="group relative flex align-middle">
             <img
