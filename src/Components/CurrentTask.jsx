@@ -48,6 +48,7 @@ export default function CurrentTask({
         </h2>
         <div className="space-y-2">
           <p className="text-sm text-gray-600">{currentTask.clues}</p>
+          <p className="text-sm text-gray-600">Contract value: <b>{currentTask.value}</b> money.</p>
         </div>
       </div>
     </>
