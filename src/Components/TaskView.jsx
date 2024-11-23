@@ -88,6 +88,7 @@ export default function TaskView({
           money={money}
           addNewAgent={addNewAgent}
           submitTask={submitTask}
+          nextTask={nextTask}
           rejectTask={rejectTask}
           isAgentSelected={isAgentSelected}
         />
