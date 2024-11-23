@@ -5,9 +5,8 @@ import CurrentTask from './CurrentTask.jsx';
 import TaskContainer from './TaskContainer.jsx';
 
 
-export default function TaskView({ tasks, agents,  setTasks, setAgents, selectedAgentIndex, setSelectedAgentIndex }) {
-  const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
-  const [finishedTasks, setFinishedTasks] = useState([]);
+export default function TaskView({ tasks, agents, finishedTasks, setFinishedTasks, setTasks, setAgents, selectedAgentIndex, setSelectedAgentIndex }) {
+  const [currentTaskIndex, setCurrentTaskIndex] = useState(0);  
 
   const submitTask = () => {
     setFinishedTasks((prev) => [...prev, [tasks[currentTaskIndex], agents[selectedAgentIndex]]]);
