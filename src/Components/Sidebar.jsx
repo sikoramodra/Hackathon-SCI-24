@@ -1,4 +1,5 @@
 import agentIcon from '../assets/agent.png';
+import eraCheck from '../logic/yearEraCheck';
 
 export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
   return (
@@ -33,7 +34,7 @@ export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
               </p>
               <p className="mb-2 text-sm text-gray-600">
                 <span className="font-semibold">Most effective in years: </span>
-                {val.effectiveRangeStart} - {val.effectiveRangeEnd}
+                {eraCheck(val.effectiveRangeStart)} - {eraCheck(val.effectiveRangeEnd)}
               </p>
             </div>
           </div>
