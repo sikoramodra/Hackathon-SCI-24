@@ -7,11 +7,11 @@ export default function Sidebar(props) {
         {props.agents.map((val, key) => (
           <div key={key} className="group relative flex align-middle">
             <img
-              className={`h-20 w-20 cursor-pointer rounded ${props.selectedAgent === val ? 'bg-gray-400' : 'bg-gray-300'} shadow-md"`}
+              className={`h-20 w-20 cursor-pointer rounded ${props.selectedAgent === key ? 'bg-gray-400' : 'bg-gray-300'} shadow-md"`}
               src={agentIcon}
               alt="agent"
               onClick={() => {
-                props.setSelectedAgent(val);
+                props.setSelectedAgent(key);
               }}
             />
             <div className="absolute left-full ml-2 hidden w-32 rounded bg-gray-300 p-2 shadow-md group-hover:block">

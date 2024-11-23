@@ -16,7 +16,7 @@ export default function App() {
 
   const [selectedAgent, setSelectedAgent] = useState(null);
   useEffect(() => {
-    console.log(selectedAgent);
+    console.log(agents[selectedAgent]);
   }, [selectedAgent]);
 
   return (
