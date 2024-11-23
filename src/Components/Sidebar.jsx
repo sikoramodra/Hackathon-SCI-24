@@ -37,7 +37,10 @@ export default function Sidebar({ selectedAgent, setSelectedAgent, agents }) {
         {agents.map((val, key) => (
           <div key={key} className="group relative flex align-middle">
             <img
-              className={`h-20 w-20 cursor-pointer rounded ${selectedAgent === key ? 'bg-gray-400' : 'bg-gray-300'} shadow-md"`}
+              className={`h-20 w-20 cursor-pointer rounded overflow-hidden ${
+                selectedAgent === key ? 'bg-gray-400 scale-110' : 'bg-gray-300'
+              } shadow-md transition-transform duration-300 ease-in-out transform 
+              hover:scale-[1] hover:object-scale-110`}
               src={calculateImage(val)}
               alt="agent"
               onClick={() => {
