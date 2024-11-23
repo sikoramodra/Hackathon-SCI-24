@@ -1,5 +1,6 @@
 import globalVars from "./globalVariables";
 import Task from "./task";
+import { fakerEN, fakerDE, fakerRU, fakerIT } from "@faker-js/faker";
 const specs = globalVars['SPECIALTIES']
 const reqTypes = [
     'age',
@@ -9,21 +10,90 @@ const reqTypes = [
 ]
 
 const generateTask = (difficulty) => {
-    let additionalReqAmount = __generateAdditionalReqAmount(difficulty)
-    let requirements = []
+    let additionalReqAmount = __generateAdditionalReqAmount(difficulty);
+    let requirements = [];
     let remainingReqTypes = [...reqTypes];
-    remainingReqTypes.splice(remainingReqTypes.indexOf('year', 1))
-    for(let i = 0; i < additionalReqAmount; i++){
-        let requirement = __generateReq(remainingReqTypes)
-        remainingReqTypes.splice(reqTypes.indexOf(requirement[0]), 1);
-        requirements.push(requirement)
+    remainingReqTypes.splice(remainingReqTypes.indexOf('year'), 1);  
+    
+    for (let i = 0; i < additionalReqAmount; i++) {
+        let requirement = __generateReq(remainingReqTypes);
+        if (requirement) {  
+            remainingReqTypes.splice(remainingReqTypes.indexOf(requirement[0]), 1);  
+            requirements.push(requirement);
+        }
     }
-    requirements.push(
-        ['year', __getRandomIntInclusive(globalVars['TIME_START'], globalVars['TIME_END'])]
-    )
+    requirements.push(['year', __getRandomIntInclusive(globalVars['TIME_START'], globalVars['TIME_END'])]);
 
-    const task = new Task("task description agkdgkdagkadjgkdjagnjadgnkjadgdakjn", requirements, difficulty);
-    return task
+    const taskDescription = __generateTaskDescription(requirements);
+    console.log(taskDescription);  
+    const task = new Task(taskDescription, requirements, difficulty);
+    return task;
+}
+
+function __generateTaskDescription(requirements) {
+    const targetName = __generateRandomNationalityName();  
+    const actions = {
+        medic: [
+            'Heal ' + targetName,
+            'Cure ' + targetName + "'s amolastasis",
+            'Bring ' + targetName + ' back to life'
+        ],
+        spy: [
+            'Blackmail ' + targetName,
+            'Infiltrate ' + targetName + "'s compound",
+            'Send ' + targetName + ' to ' + fakerEN.location.country(),
+        ],
+        killer: [
+            'Make ' + targetName + "'s death look like an accident",
+            "Assassinate " + targetName,
+            "Kill " + targetName
+        ],
+        engineer: [
+            "Introduce cold fusion to the people of " + fakerEN.location.country(),
+            "Build a bridge from " + fakerEN.location.country() + " to " + fakerEN.location.city(),
+            "Hack " + fakerEN.internet.displayName() + "'s computer"
+        ],
+        civilian: [
+            'Serve ' + fakerEN.food.dish() + ' to ' + targetName,
+            'Warn ' + targetName + ' about the coming paradox',
+            'Walk through a door at the exact right time',
+            'Perceive a butterfly',
+            'Insult ' + targetName + ' as viciously as possible',
+            'Become a street musician in ' + fakerEN.location.city(),
+            'Hide ' + targetName + "'s toothbrush",
+            "Make " + targetName + " hate spiders",
+            "Make " + targetName + " learn English"
+        ]
+    };
+
+    const purposes = [
+        " to forever alter history.",
+        " to crush " + fakerEN.location.country() + " once and for all.",
+        " to make my internet slightly faster.",
+        " so my kids would have a brighter future.",
+        " because it's the right thing to do.",
+        " to make my company slightly more money.",
+        " because it would be funny.",
+    ];
+
+    let actionCategory = 'civilian';
+    const specRequirement = requirements.find(req => req[0] === 'spec');
+    if (specRequirement) {
+        const spec = specRequirement[1];
+        actionCategory = spec;
+    }
+
+    const actionCategoryList = actions[actionCategory] || actions['civilian'];
+    const selectedAction = actionCategoryList[__getRandomIntInclusive(0, actionCategoryList.length - 1)];
+    const selectedPurpose = purposes[__getRandomIntInclusive(0, purposes.length - 1)];
+    return selectedAction + selectedPurpose;
+}
+
+
+function __generateRandomNationalityName(){
+    const fakers = [fakerDE, fakerEN, fakerRU, fakerIT]
+    const faker = fakers[__getRandomIntInclusive(0, fakers.length -1)]
+    return faker.person.fullName()
 }
 
 function __generateAdditionalReqAmount(difficulty) {
