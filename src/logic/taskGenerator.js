@@ -25,9 +25,13 @@ const generateTask = (difficulty) => {
     requirements.push(['year', __getRandomIntInclusive(globalVars['TIME_START'], globalVars['TIME_END'])]);
 
     const taskDescription = __generateTaskDescription(requirements);
-    console.log(taskDescription);  
-    const task = new Task(taskDescription, requirements, difficulty);
+    const taskValue = __generateTaskValue(difficulty)
+    const task = new Task(taskDescription, requirements, difficulty, taskValue);
     return task;
+}
+
+function __generateTaskValue(difficulty){
+    return 5 + (1/10 * Math.pow(difficulty, 2))
 }
 
 function __generateTaskDescription(requirements) {
